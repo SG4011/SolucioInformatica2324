@@ -28,7 +28,7 @@ public class GUI {
 
     public void dibuixaPantallaInicial(PApplet p5){
 
-        p5.background(55);
+        p5.background(appColors.getColorAt(0));
         dibuixaLogo(p5);
         dibuixaInput(p5);
         dibuixaImatge(p5,360, 14*marginV);
@@ -36,14 +36,14 @@ public class GUI {
     }
 
     public void dibuixaPantallaPrincipal(PApplet p5){
-        p5.background(55);
+        p5.background(appColors.getColorAt(0));
         dibuixaLogo(p5);dibuixaBanner(p5, 3*marginH + logoWidth, marginV);
         dibuixaImatge(p5, 300+marginH, 14*marginV);
         dibuixaSideBar(p5);
     }
 
     public void dibuixaPantallaColección(PApplet p5){
-        p5.background(55);
+        p5.background(appColors.getColorAt(0));
         dibuixaLogo(p5);dibuixaBanner(p5, marginH, marginV);
         dibuixaImatgeColecciónExploración1(p5, marginH, 275);
         dibuixaImatgeColecciónExploración12(p5, marginH, 475);
@@ -52,7 +52,7 @@ public class GUI {
     }
 
     public void dibuixaPantallaExploración(PApplet p5){
-        p5.background(55);
+        p5.background(appColors.getColorAt(0));
         dibuixaLogo(p5);dibuixaBanner(p5, marginH, marginV);
         dibuixaImatgeColecciónExploración1(p5, marginH, 275);
         dibuixaImatgeColecciónExploración12(p5, marginH, 475);
@@ -61,7 +61,7 @@ public class GUI {
     }
 
     public void dibuixaPantallaPersonalización(PApplet p5){
-        p5.background(55);
+        p5.background(appColors.getColorAt(0));
         dibuixaLogo(p5);dibuixaBanner(p5, marginH, marginV);
         dibuixaImatgePersonalizaciónCompra(p5, marginH, 275);
 
@@ -167,10 +167,22 @@ public class GUI {
 
     public void dibuixaSideBar(PApplet p5){
         // Zona Sidebar ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        p5.fill(appColors.getSecondColor());
+        p5.fill(appColors.getColorAt(2));
         p5.rect(marginH, 2*marginV + logoHeight, sidebarWidth, sidebarHeight);
-        p5.fill(0); p5.textFont(fontsApp.getSecondFont()); p5.textSize(midaSubtitol);
-        p5.text("SIDEBAR", marginH + sidebarWidth/2, marginV + logoHeight + sidebarHeight/2);
+        p5.fill(0); p5.textFont(fontsApp.getSecondFont()); p5.textSize(midaParagraf);
+        p5.text("Explora", marginH + sidebarWidth/2, marginV + logoHeight + sidebarHeight/2);
+        p5.fill(appColors.getColorAt(2));
+        p5.rect(marginH, 2*marginV + logoHeight + 105, sidebarWidth, sidebarHeight);
+        p5.fill(0); p5.textFont(fontsApp.getSecondFont()); p5.textSize(midaParagraf);
+        p5.text("Compra", marginH + sidebarWidth/2, marginV + logoHeight + sidebarHeight/2 + 105);
+        p5.fill(appColors.getColorAt(2));
+        p5.rect(marginH, 2*marginV + logoHeight + 105*2, sidebarWidth, sidebarHeight);
+        p5.fill(0); p5.textFont(fontsApp.getSecondFont()); p5.textSize(midaParagraf);
+        p5.text("Personaliza", marginH + sidebarWidth/2, marginV + logoHeight + sidebarHeight/2 + 105*2);
+        p5.fill(appColors.getColorAt(2));
+        p5.rect(marginH, 2*marginV + logoHeight + 105*3, sidebarWidth, sidebarHeight);
+        p5.fill(0); p5.textFont(fontsApp.getSecondFont()); p5.textSize(midaParagraf);
+        p5.text("Colección", marginH + sidebarWidth/2, marginV + logoHeight + sidebarHeight/2 + 105*3);
     }
 
     public void dibuixaBanner(PApplet p5, float x, float y){

@@ -6,7 +6,7 @@ public class Layout {
     public static float marginH = 20, marginV = 20;
 
     // Dimensions Zona Lateral
-    public static float sidebarWidth  = 200, sidebarHeight = 420;
+    public static float sidebarWidth  = 200, sidebarHeight = 100;
 
     // Dimensions Logo
     public static float logoWidth  = 200, logoHeight = 200;
@@ -24,7 +24,7 @@ public class Layout {
     public static float imagenCWidth = 175, imagenCHeight = 175;
 
     // Dimensions Imatges Pantalla Personalización y Compra
-    public static float imagenPWidth = 300, imagenPHeight = 300;
+    public static float imagenPWidth = 640, imagenPHeight = 400;
 
 }
 

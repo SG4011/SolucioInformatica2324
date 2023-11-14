@@ -14,8 +14,8 @@ public class Colores {
     void setColors(PApplet p5){
         this.colors = new int[5];
         this.colors[0] = p5.color(0xFF95D9C3);
-        this.colors[1] = p5.color(0xFF307351);
-        this.colors[2] = p5.color(0xFF5F5980);
+        this.colors[1] = p5.color(0xFF00C49A);
+        this.colors[2] = p5.color(0xFFF21B3F);
         this.colors[3] = p5.color(0xFFE2AFDE);
         this.colors[4] = p5.color(0xFFFCF0CC);
     }

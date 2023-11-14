@@ -43,7 +43,6 @@ public class programaPrincipal extends PApplet {
                 break;
         }
 
-        ////rsdtfyguhjhgfd
 
     }
 
