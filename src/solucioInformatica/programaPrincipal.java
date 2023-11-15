@@ -69,7 +69,26 @@ public class programaPrincipal extends PApplet {
     // ******************* MOUSE interaction ***************************** //
 
     public void mousePressed(){
+
         println("X: "+mouseX+", Y:"+mouseY);
+
+        if(gui.pantallaActual == GUI.PANTALLA.INICIAL){
+            if(gui.logIn.mouseSobreBoto(this)){
+                gui.pantallaActual = GUI.PANTALLA.PRINCIPAL;
+            }
+        }
+
+        if(gui.pantallaActual == GUI.PANTALLA.PRINCIPAL){
+            if(gui.explora.mouseSobreBoto(this)){
+                gui.pantallaActual = GUI.PANTALLA.EXPLORACIÓN;
+            }
+            else if(gui.colección.mouseSobreBoto(this)){
+                gui.pantallaActual = GUI.PANTALLA.COLECCIÓN;
+            }
+            else if(gui.personaliza.mouseSobreBoto(this)){
+                gui.pantallaActual = GUI.PANTALLA.PERSONALIZACIÓN;
+            }
+        }
     }
 
     public void mouseDragged(){
