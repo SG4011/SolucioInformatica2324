@@ -16,6 +16,9 @@ public class GUI {
     // Colors i Fonts de l'APP
     Colores appColors;
     Fuentes fontsApp;
+    // Text Fields ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    TextField username;
+    TextField password;
     // Botons +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     Boton logIn;
     Boton explora;
@@ -30,6 +33,10 @@ public class GUI {
         pantallaActual = PANTALLA.INICIAL;
         appColors = new Colores(p5);   // Constructor dels colors de l'App
         fontsApp = new Fuentes(p5);     // Constructor de les fonts de l'App
+
+        // Text Fields ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        username = new TextField(p5, 360, (int)(2*marginV), (int)inputWidth, (int)inputHeight);
+        password = new TextField(p5, 360, (int)(8*marginV), (int)inputWidth, (int)inputHeight );
 
         // Botons +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         logIn = new Boton(p5, "LOG IN", 480, marginV+600, 320, 50);
@@ -106,16 +113,10 @@ public class GUI {
 
     public void dibuixaInput(PApplet p5){ // Pantalla inicial
         // Input Username ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        p5.fill(appColors.getColorAt(4));
-        p5.rect(360, 2*marginV, inputWidth, inputHeight);
-        p5.fill(0); p5.textFont(fontsApp.getThirdFont()); p5.textSize(midaSubtitol);
-        p5.text("username", 540, 110);
+        username.display(p5);
 
         // Input password +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        p5.fill(appColors.getColorAt(4));
-        p5.rect(360, 8*marginV, inputWidth, inputHeight);
-        p5.fill(0); p5.textFont(fontsApp.getThirdFont()); p5.textSize(midaSubtitol);
-        p5.text("password", 540, 215);
+        password.display(p5);
     }
 
     public void dibuixaImatge(PApplet p5, float x, float y){ // Pantalla inicial y principal

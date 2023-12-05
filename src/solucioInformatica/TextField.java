@@ -15,7 +15,7 @@ public class TextField {
 
     // Text del camp
     public String text = "";
-    int textSize = 24;
+    int textSize = (int)Medidas.midaSubtitol;
 
     boolean selected = false;
 

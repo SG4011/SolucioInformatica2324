@@ -64,6 +64,11 @@ public class programaPrincipal extends PApplet {
         else if(key=='4'){
             gui.pantallaActual = GUI.PANTALLA.PERSONALIZACIÓN;
         }
+
+        //Text Fields Key Pressed ++++++++++++++++++++++++++++++++++++++++
+
+        gui.username.keyPressed(key, keyCode);
+        gui.password.keyPressed(key, keyCode);
     }
 
     // ******************* MOUSE interaction ***************************** //
@@ -89,12 +94,20 @@ public class programaPrincipal extends PApplet {
                 gui.pantallaActual = GUI.PANTALLA.PERSONALIZACIÓN;
             }
         }
-
+        if(gui.pantallaActual == GUI.PANTALLA.INICIAL){
+            gui.logo.activado = false;
+        }
+        else{gui.logo.activado = true;}
         if(gui.pantallaActual!=GUI.PANTALLA.INICIAL){
             if(gui.logo.mouseSobreBoto(this)){
                 gui.pantallaActual = GUI.PANTALLA.PRINCIPAL;
             }
         }
+
+        // Text Field Is Pressed ++++++++++++++++++++++++++++++++++++++++++
+
+        gui.username.isPressed(this);
+        gui.password.isPressed(this);
     }
 
     public void mouseDragged(){
