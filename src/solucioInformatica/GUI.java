@@ -22,6 +22,7 @@ public class GUI {
     Boton personaliza;
     Boton colección;
     Boton compra;
+    Boton logo;
 
 
     // Constructor de la GUI
@@ -46,6 +47,8 @@ public class GUI {
         colección = new Boton(p5, "COLECCIÓN", marginH, 2*marginV + logoHeight + 105*3, sidebarWidth, sidebarHeight);
         colección.setColors(appColors.getColorAt(2), appColors.getColorAt(2), appColors.getColorAt(3), 155);
 
+        logo = new Boton(p5, "LOGO", 1080-marginH, marginV, logoWidth, logoHeight);
+        logo.setColors(appColors.getColorAt(1), appColors.getColorAt(1), appColors.getColorAt(2),155 );
 
     }
 
@@ -66,10 +69,7 @@ public class GUI {
         dibuixaImatge(p5, 300+marginH, 14*marginV);
 
         p5.textFont(fontsApp.getFontAt(1));
-        colección.display(p5);
-        compra.display(p5);
-        explora.display(p5);
-        personaliza.display(p5);
+        dibuixaSideBar(p5);
     }
 
     public void dibuixaPantallaColección(PApplet p5){
@@ -101,10 +101,7 @@ public class GUI {
     // ZONES DE LA GUI
 
     public void dibuixaLogo(PApplet p5){
-        p5.fill(appColors.getSecondColor());
-        p5.rect(1080-marginH, marginV, logoWidth, logoHeight);
-        p5.fill(0); p5.textFont(fontsApp.getSecondFont()); p5.textSize(midaTitol);
-        p5.text("LOGO", 1080-marginH + logoWidth/2, marginV + logoHeight/2);
+        logo.display(p5);
     }
 
     public void dibuixaInput(PApplet p5){ // Pantalla inicial
@@ -190,25 +187,10 @@ public class GUI {
 
     public void dibuixaSideBar(PApplet p5){
         // Zona Sidebar ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        p5.fill(appColors.getColorAt(2));
-        p5.rect(marginH, 2*marginV + logoHeight, sidebarWidth, sidebarHeight);
-        p5.fill(0); p5.textFont(fontsApp.getSecondFont()); p5.textSize(midaParagraf);
-        p5.text("Explora", marginH + sidebarWidth/2, marginV + logoHeight + sidebarHeight/2);
-
-        p5.fill(appColors.getColorAt(2));
-        p5.rect(marginH, 2*marginV + logoHeight + 105, sidebarWidth, sidebarHeight);
-        p5.fill(0); p5.textFont(fontsApp.getSecondFont()); p5.textSize(midaParagraf);
-        p5.text("Compra", marginH + sidebarWidth/2, marginV + logoHeight + sidebarHeight/2 + 105);
-
-        p5.fill(appColors.getColorAt(2));
-        p5.rect(marginH, 2*marginV + logoHeight + 105*2, sidebarWidth, sidebarHeight);
-        p5.fill(0); p5.textFont(fontsApp.getSecondFont()); p5.textSize(midaParagraf);
-        p5.text("Personaliza", marginH + sidebarWidth/2, marginV + logoHeight + sidebarHeight/2 + 105*2);
-
-        p5.fill(appColors.getColorAt(2));
-        p5.rect(marginH, 2*marginV + logoHeight + 105*3, sidebarWidth, sidebarHeight);
-        p5.fill(0); p5.textFont(fontsApp.getSecondFont()); p5.textSize(midaParagraf);
-        p5.text("Colección", marginH + sidebarWidth/2, marginV + logoHeight + sidebarHeight/2 + 105*3);
+        colección.display(p5);
+        compra.display(p5);
+        explora.display(p5);
+        personaliza.display(p5);
     }
 
     public void dibuixaBanner(PApplet p5, float x, float y){
@@ -217,44 +199,5 @@ public class GUI {
         p5.rect(X, Y, bannerWidth, bannerHeight);
         p5.fill(0); p5.textFont(fontsApp.getFontAt(0)); p5.textSize(midaTitol);
         p5.text(pantallaActual + "("+pantallaActual.ordinal() +")", X + bannerWidth/2, Y + bannerHeight/2);
-    }
-
-    public void dibuixaColumna1(PApplet p5){
-        // Zona Columnes 1, 2 i 3 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        p5.fill(appColors.getThirdColor());
-        p5.rect(2*marginH + sidebarWidth, 2*marginV + bannerHeight, 3*columnWidth + 2*marginH, columnHeight);
-        p5.fill(0); p5.textFont(fontsApp.getThirdFont()); p5.textSize(midaParagraf);
-        p5.text("COLUMN 1", 2*marginH + sidebarWidth + 3*columnWidth/2, 2*marginV + bannerHeight + columnHeight/2);
-    }
-
-    public void dibuixaColumnes12(PApplet p5){
-        // Zona Columnes 1, 2 i 3 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        p5.fill(appColors.getThirdColor());
-        p5.rect(2*marginH + sidebarWidth, 2*marginV + bannerHeight, columnWidth, columnHeight);
-        p5.fill(0); p5.textFont(fontsApp.getThirdFont()); p5.textSize(midaParagraf);
-        p5.text("COLUMN 1", 2*marginH + sidebarWidth +columnWidth/2, 2*marginV + bannerHeight + columnHeight/2);
-
-        p5.fill(appColors.getThirdColor());
-        p5.rect(3*marginH + sidebarWidth + columnWidth, 2*marginV + bannerHeight, 2*columnWidth + marginH, columnHeight);
-        p5.fill(0); p5.textFont(fontsApp.getThirdFont()); p5.textSize(midaParagraf);
-        p5.text("COLUMN 2", 3*marginH + sidebarWidth + 2*columnWidth, 2*marginV + bannerHeight + columnHeight/2);
-    }
-
-    public void dibuixaColumnes123(PApplet p5){
-        // Zona Columnes 1, 2 i 3 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        p5.fill(appColors.getThirdColor());
-        p5.rect(2*marginH + sidebarWidth, 2*marginV + bannerHeight, columnWidth, columnHeight);
-        p5.fill(0); p5.textFont(fontsApp.getThirdFont()); p5.textSize(midaParagraf);
-        p5.text("COLUMN 1", 2*marginH + sidebarWidth +columnWidth/2, 2*marginV + bannerHeight + columnHeight/2);
-
-        p5.fill(appColors.getThirdColor());
-        p5.rect(3*marginH + sidebarWidth + columnWidth, 2*marginV + bannerHeight, columnWidth, columnHeight);
-        p5.fill(0); p5.textFont(fontsApp.getThirdFont()); p5.textSize(midaParagraf);
-        p5.text("COLUMN 2", 3*marginH + sidebarWidth + columnWidth +columnWidth/2, 2*marginV + bannerHeight + columnHeight/2);
-
-        p5.fill(appColors.getThirdColor());
-        p5.rect(4*marginH + sidebarWidth + 2*columnWidth, 2*marginV + bannerHeight, columnWidth, columnHeight);
-        p5.fill(0); p5.textFont(fontsApp.getThirdFont()); p5.textSize(midaParagraf);
-        p5.text("COLUMN 3", 4*marginH + sidebarWidth + 2*columnWidth +columnWidth/2, 2*marginV + bannerHeight + columnHeight/2);
     }
 }

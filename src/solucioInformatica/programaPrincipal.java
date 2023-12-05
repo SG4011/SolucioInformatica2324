@@ -89,6 +89,12 @@ public class programaPrincipal extends PApplet {
                 gui.pantallaActual = GUI.PANTALLA.PERSONALIZACIÓN;
             }
         }
+
+        if(gui.pantallaActual!=GUI.PANTALLA.INICIAL){
+            if(gui.logo.mouseSobreBoto(this)){
+                gui.pantallaActual = GUI.PANTALLA.PRINCIPAL;
+            }
+        }
     }
 
     public void mouseDragged(){
