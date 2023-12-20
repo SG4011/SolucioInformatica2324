@@ -41,6 +41,9 @@ public class programaPrincipal extends PApplet {
 
             case PERSONALIZACIÓN:   gui.dibuixaPantallaPersonalización(this);
                 break;
+
+            case INSTRUCCIONES:     gui.dibuixaPantallaAbout(this);
+                break;
         }
 
 
@@ -63,6 +66,9 @@ public class programaPrincipal extends PApplet {
         }
         else if(key=='4'){
             gui.pantallaActual = GUI.PANTALLA.PERSONALIZACIÓN;
+        }
+        else if(key=='5'){
+            gui.pantallaActual = GUI.PANTALLA.INSTRUCCIONES;
         }
 
         //Text Fields Key Pressed ++++++++++++++++++++++++++++++++++++++++
@@ -93,16 +99,24 @@ public class programaPrincipal extends PApplet {
             else if(gui.personaliza.mouseSobreBoto(this)){
                 gui.pantallaActual = GUI.PANTALLA.PERSONALIZACIÓN;
             }
+            else if(gui.instrucciones.mouseSobreBoto(this)){
+                gui.pantallaActual = GUI.PANTALLA.INSTRUCCIONES;
+            }
         }
         if(gui.pantallaActual == GUI.PANTALLA.INICIAL){
             gui.logo.activado = false;
         }
-        else{gui.logo.activado = true;}
+        else{
+            gui.logo.activado = true;
+        }
+
         if(gui.pantallaActual!=GUI.PANTALLA.INICIAL){
             if(gui.logo.mouseSobreBoto(this)){
                 gui.pantallaActual = GUI.PANTALLA.PRINCIPAL;
             }
         }
+
+
 
         // Text Field Is Pressed ++++++++++++++++++++++++++++++++++++++++++
 

@@ -1,7 +1,6 @@
 package solucioInformatica;
 
 import processing.core.PApplet;
-import processing.core.PFont;
 
 import static solucioInformatica.Medidas.*;
 import static solucioInformatica.Layout.*;
@@ -9,7 +8,7 @@ import static solucioInformatica.Layout.*;
 public class GUI {
 
     // Enumerat de les Pantalles de l'App
-    public enum PANTALLA {INICIAL, PRINCIPAL, COLECCIÓN, EXPLORACIÓN, PERSONALIZACIÓN}; // COMPRA
+    public enum PANTALLA {INICIAL, PRINCIPAL, COLECCIÓN, EXPLORACIÓN, PERSONALIZACIÓN, INSTRUCCIONES};
     // Pantalla Actual
     public PANTALLA pantallaActual;
 
@@ -20,8 +19,8 @@ public class GUI {
     TextField username;
     TextField password;
     // Botons +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    Boton logIn; Boton explora; Boton personaliza; Boton colección;
-    Boton compra; Boton logo;
+    Boton logIn; Boton logo;
+    Boton explora; Boton personaliza; Boton colección; Boton instrucciones;
     Boton visualiza; Boton visualiza2; Boton visualiza3; Boton visualiza4;
 
 
@@ -39,8 +38,8 @@ public class GUI {
         logIn = new Boton(p5, "LOG IN", 480, marginV+600, 320, 50);
         logIn.setColors(appColors.getColorAt(2), appColors.getColorAt(2), appColors.getColorAt(3), 155);
 
-        compra = new Boton(p5, "COMPRA", marginH, 2*marginV + logoHeight + 105, sidebarWidth, sidebarHeight);
-        compra.setColors(appColors.getColorAt(2), appColors.getColorAt(2), appColors.getColorAt(3), 155);
+        instrucciones = new Boton(p5, "INSTRUCCIONES", marginH, 2*marginV + logoHeight + 105, sidebarWidth, sidebarHeight);
+        instrucciones.setColors(appColors.getColorAt(2), appColors.getColorAt(2), appColors.getColorAt(3), 155);
 
         explora = new Boton(p5, "EXPLORA", marginH, 2*marginV + logoHeight, sidebarWidth, sidebarHeight);
         explora.setColors(appColors.getColorAt(2), appColors.getColorAt(2), appColors.getColorAt(3), 155);
@@ -111,6 +110,11 @@ public class GUI {
         dibuixaLogo(p5);dibuixaBanner(p5, marginH, marginV);
         dibuixaImatgePersonalizaciónCompra(p5, marginH, 275);
 
+    }
+
+    public void dibuixaPantallaAbout(PApplet p5){
+        p5.background(appColors.getColorAt(0));
+        dibuixaLogo(p5); dibuixaBanner(p5, marginH, marginV);
     }
 
 
@@ -201,7 +205,7 @@ public class GUI {
     public void dibuixaSideBar(PApplet p5){
         // Zona Sidebar ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         colección.display(p5);
-        compra.display(p5);
+        instrucciones.display(p5);
         explora.display(p5);
         personaliza.display(p5);
     }
