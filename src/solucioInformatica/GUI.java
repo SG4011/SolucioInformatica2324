@@ -20,12 +20,9 @@ public class GUI {
     TextField username;
     TextField password;
     // Botons +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    Boton logIn;
-    Boton explora;
-    Boton personaliza;
-    Boton colección;
-    Boton compra;
-    Boton logo;
+    Boton logIn; Boton explora; Boton personaliza; Boton colección;
+    Boton compra; Boton logo;
+    Boton visualiza; Boton visualiza2; Boton visualiza3; Boton visualiza4;
 
 
     // Constructor de la GUI
@@ -56,6 +53,18 @@ public class GUI {
 
         logo = new Boton(p5, "LOGO", 1080-marginH, marginV, logoWidth, logoHeight);
         logo.setColors(appColors.getColorAt(1), appColors.getColorAt(1), appColors.getColorAt(2),155 );
+
+        visualiza = new Boton(p5, "VISUALIZA", marginH+200, 275+130, imagenCWidth+25, imagenCHeight-130);
+        visualiza.setColors(appColors.getColorAt(2), appColors.getColorAt(2), appColors.getColorAt(3), 155);
+
+        visualiza2 = new Boton(p5, "VISUALIZA", marginH+200, 475+130, imagenCWidth+25, imagenCHeight-130);
+        visualiza2.setColors(appColors.getColorAt(2), appColors.getColorAt(2), appColors.getColorAt(3), 155);
+
+        visualiza3 = new Boton(p5, "VISUALIZA", marginH+600+200, 275+130, imagenCWidth+25, imagenCHeight-130);
+        visualiza3.setColors(appColors.getColorAt(2), appColors.getColorAt(2), appColors.getColorAt(3), 155);
+
+        visualiza4 = new Boton(p5, "VISUALIZA", marginH+600+200, 475+130, imagenCWidth+25, imagenCHeight-130);
+        visualiza4.setColors(appColors.getColorAt(2), appColors.getColorAt(2), appColors.getColorAt(3), 155);
 
     }
 
@@ -130,53 +139,56 @@ public class GUI {
     public void dibuixaImatgeColecciónExploración1(PApplet p5, float x, float y){ // Pantalla colección i exploración
         float X = x; float Y = y;
         p5.fill(appColors.getColorAt(3));
-        p5.rect(X, Y, imagenCWidth, imagenCHeight); // Imatge
+        p5.rect(X, Y, imagenCWidth, imagenCHeight);
+        p5.fill(0); p5.textFont(fontsApp.getThirdFont()); p5.textSize(midaParagraf);
+        p5.text("imagen", X+75, Y+75);      // Imatge
         p5.fill(appColors.getColorAt(1));
         p5.rect(X+200, Y, imagenCWidth+25, imagenCHeight-50); // Info de la imatge
         p5.fill(appColors.getColorAt(2));
-        p5.rect(X+200, Y+130, imagenCWidth+25, imagenCHeight-130); // Botó afegir carrito
-        p5.fill(0); p5.textFont(fontsApp.getThirdFont()); p5.textSize(midaParagraf);
-        p5.text("imagen", X+75, Y+75); p5.text("info", X+300, Y+75);
-        p5.text("carrito", X+300, Y+155);
+        visualiza.display(p5);
+        p5.text("info", X+300,Y+75);
     }
 
     public void dibuixaImatgeColecciónExploración12(PApplet p5, float x, float y){ // Pantalla colección i exploración
         float X = x; float Y = y;
         p5.fill(appColors.getColorAt(3));
-        p5.rect(X, Y, imagenCWidth, imagenCHeight); // Imatge
+        p5.rect(X, Y, imagenCWidth, imagenCHeight);
+        p5.fill(0); p5.textFont(fontsApp.getThirdFont()); p5.textSize(midaParagraf);
+        p5.text("imagen", X+75, Y+75);// Imatge
         p5.fill(appColors.getColorAt(1));
         p5.rect(X+200, Y, imagenCWidth+25, imagenCHeight-50); // Info de la imatge
         p5.fill(appColors.getColorAt(2));
-        p5.rect(X+200, Y+130, imagenCWidth+25, imagenCHeight-130); // Botó afegir carrito
-        p5.fill(0); p5.textFont(fontsApp.getThirdFont()); p5.textSize(midaParagraf);
-        p5.text("imagen", X+75, Y+75); p5.text("info", X+300, Y+75);
-        p5.text("carrito", X+300, Y+155);
+        visualiza2.display(p5);
+        p5.text("info", X+300, Y+75);
+
     }
 
     public void dibuixaImatgeColecciónExploración123(PApplet p5, float x, float y){ // Pantalla colección i exploración
         float X = x; float Y = y;
         p5.fill(appColors.getColorAt(3));
-        p5.rect(X, Y, imagenCWidth, imagenCHeight); // Imatge
+        p5.rect(X, Y, imagenCWidth, imagenCHeight);
+        p5.fill(0); p5.textFont(fontsApp.getThirdFont()); p5.textSize(midaParagraf);
+        p5.text("imagen", X+75, Y+75);      // Imatge
         p5.fill(appColors.getColorAt(1));
         p5.rect(X+200, Y, imagenCWidth+25, imagenCHeight-50); // Info de la imatge
         p5.fill(appColors.getColorAt(2));
-        p5.rect(X+200, Y+130, imagenCWidth+25, imagenCHeight-130); // Botó afegir carrito
-        p5.fill(0); p5.textFont(fontsApp.getThirdFont()); p5.textSize(midaParagraf);
-        p5.text("imagen", X+75, Y+75); p5.text("info", X+300, Y+75);
-        p5.text("carrito", X+300, Y+155);
+        visualiza3.display(p5);
+        p5.text("info", X+300, Y+75);
+
     }
 
     public void dibuixaImatgeColecciónExploración1234(PApplet p5, float x, float y){ // Pantalla colección i exploración
         float X = x; float Y = y;
         p5.fill(appColors.getColorAt(3));
-        p5.rect(X, Y, imagenCWidth, imagenCHeight); // Imatge
+        p5.rect(X, Y, imagenCWidth, imagenCHeight);
+        p5.fill(0); p5.textFont(fontsApp.getThirdFont()); p5.textSize(midaParagraf);
+        p5.text("imagen", X+75, Y+75);      // Imatge
         p5.fill(appColors.getColorAt(1));
         p5.rect(X+200, Y, imagenCWidth+25, imagenCHeight-50); // Info de la imatge
         p5.fill(appColors.getColorAt(2));
-        p5.rect(X+200, Y+130, imagenCWidth+25, imagenCHeight-130); // Botó afegir carrito
-        p5.fill(0); p5.textFont(fontsApp.getThirdFont()); p5.textSize(midaParagraf);
-        p5.text("imagen", X+75, Y+75); p5.text("info", X+300, Y+75);
-        p5.text("carrito", X+300, Y+155);
+        visualiza4.display(p5);
+        p5.text("info", X+300, Y+75);
+
     }
 
     public void dibuixaImatgePersonalizaciónCompra(PApplet p5, float x, float y){
