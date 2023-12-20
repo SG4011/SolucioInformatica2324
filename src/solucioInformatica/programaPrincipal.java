@@ -71,6 +71,20 @@ public class programaPrincipal extends PApplet {
             gui.pantallaActual = GUI.PANTALLA.INSTRUCCIONES;
         }
 
+        if(gui.pantallaActual==GUI.PANTALLA.PERSONALIZACIÓN){
+            if(key=='a'){
+                int numRandom = floor(random(3));
+                Ornament o;
+                switch (numRandom){
+                    case 0: o= new OrnamentCercle(width/2, height/2, 50, color(255, 0, 0)); break;
+                    case 1: o = new OrnamentTriangle(width/2, height/2, 50, color(0, 255, 0)); break;
+                    case 2: o = new OrnamentEstrella(width/2, height/2, 50, color(255, 0, 255), 50, 8); break;
+                    default: o = new Ornament(width/2, height/2, 50, color(100)); break;
+                }
+                gui.collarPersonal.addOrnament(o);
+            }
+        }
+
         //Text Fields Key Pressed ++++++++++++++++++++++++++++++++++++++++
 
         gui.username.keyPressed(key, keyCode);
@@ -97,6 +111,7 @@ public class programaPrincipal extends PApplet {
                 gui.pantallaActual = GUI.PANTALLA.COLECCIÓN;
             }
             else if(gui.personaliza.mouseSobreBoto(this)){
+                gui.collarPersonal = new Collar(20, width/2, height/2, 100, 200);
                 gui.pantallaActual = GUI.PANTALLA.PERSONALIZACIÓN;
             }
             else if(gui.instrucciones.mouseSobreBoto(this)){
@@ -116,6 +131,10 @@ public class programaPrincipal extends PApplet {
             }
         }
 
+        if(gui.pantallaActual==GUI.PANTALLA.PERSONALIZACIÓN){
+            gui.collarPersonal.checkDragged(this);
+        }
+
 
 
         // Text Field Is Pressed ++++++++++++++++++++++++++++++++++++++++++
@@ -125,7 +144,9 @@ public class programaPrincipal extends PApplet {
     }
 
     public void mouseDragged(){
-        println("MOUSE DRAGGED");
+        if(gui.pantallaActual==GUI.PANTALLA.PERSONALIZACIÓN){
+            gui.collarPersonal.checkDragged(this);
+        }
     }
 
     public void mouseReleased() {

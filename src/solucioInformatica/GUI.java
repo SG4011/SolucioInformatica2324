@@ -23,6 +23,8 @@ public class GUI {
     Boton explora; Boton personaliza; Boton colección; Boton instrucciones;
     Boton visualiza; Boton visualiza2; Boton visualiza3; Boton visualiza4;
 
+    Collar collarPersonal;
+
 
     // Constructor de la GUI
     public GUI(PApplet p5){
@@ -109,7 +111,7 @@ public class GUI {
         p5.background(appColors.getColorAt(0));
         dibuixaLogo(p5);dibuixaBanner(p5, marginH, marginV);
         dibuixaImatgePersonalizaciónCompra(p5, marginH, 275);
-
+        collarPersonal.display(p5);
     }
 
     public void dibuixaPantallaAbout(PApplet p5){
