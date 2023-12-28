@@ -76,10 +76,10 @@ public class programaPrincipal extends PApplet {
                 int numRandom = floor(random(3));
                 Ornament o;
                 switch (numRandom){
-                    case 0: o= new OrnamentCercle(width/2, height/2, 50, color(255, 0, 0)); break;
-                    case 1: o = new OrnamentTriangle(width/2, height/2, 50, color(0, 255, 0)); break;
-                    case 2: o = new OrnamentEstrella(width/2, height/2, 50, color(255, 0, 255), 50, 8); break;
-                    default: o = new Ornament(width/2, height/2, 50, color(100)); break;
+                    case 0: o= new OrnamentCercle(width/2, height/2, 25, color(255, 0, 0)); break;
+                    case 1: o = new OrnamentTriangle(width/2, height/2, 25, color(0, 255, 0)); break;
+                    case 2: o = new OrnamentEstrella(width/2, height/2, 50, color(255, 0, 255), 25, 10); break;
+                    default: o = new Ornament(width/2, height/2, 25, color(100)); break;
                 }
                 gui.collarPersonal.addOrnament(o);
             }
@@ -103,6 +103,7 @@ public class programaPrincipal extends PApplet {
             }
         }
 
+        // Botons pantalla PRINCIPAL ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         if(gui.pantallaActual == GUI.PANTALLA.PRINCIPAL){
             if(gui.explora.mouseSobreBoto(this)){
                 gui.pantallaActual = GUI.PANTALLA.EXPLORACIÓN;
@@ -118,6 +119,7 @@ public class programaPrincipal extends PApplet {
                 gui.pantallaActual = GUI.PANTALLA.INSTRUCCIONES;
             }
         }
+        // Botons pantalla INICAL +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         if(gui.pantallaActual == GUI.PANTALLA.INICIAL){
             gui.logo.activado = false;
         }
@@ -131,8 +133,25 @@ public class programaPrincipal extends PApplet {
             }
         }
 
+
+        // Botons pantalla PERSONALIZACIÓN ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         if(gui.pantallaActual==GUI.PANTALLA.PERSONALIZACIÓN){
             gui.collarPersonal.checkDragged(this);
+        }
+
+        if(gui.pantallaActual==GUI.PANTALLA.PERSONALIZACIÓN){
+            if(gui.ornCercle.mouseSobreBoto(this)){
+                Ornament o = new OrnamentCercle(width/2, height/2, 25, color(255, 0, 0));
+                gui.collarPersonal.addOrnament(o);
+            }
+            else if(gui.ornTriangle.mouseSobreBoto(this)){
+                Ornament o = new OrnamentTriangle(width/2, height/2, 25, color(0, 255, 0));
+                gui.collarPersonal.addOrnament(o);
+            }
+            else if(gui.ornEstrella.mouseSobreBoto(this)){
+                Ornament o = new OrnamentEstrella(width/2, height/2, 50, color(255, 0, 255), 25, 10);
+                gui.collarPersonal.addOrnament(o);
+            }
         }
 
 

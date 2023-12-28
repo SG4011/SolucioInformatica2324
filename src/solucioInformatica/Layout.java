@@ -23,7 +23,7 @@ public class Layout {
     // Dimensions Imatges Pantalla Colección y Exploración
     public static float imagenCWidth = 175, imagenCHeight = 175;
 
-    // Dimensions Imatges Pantalla Personalización y Compra
+    // Dimensions Imatges Pantalla Personalización
     public static float imagenPWidth = 640, imagenPHeight = 400;
 
 }

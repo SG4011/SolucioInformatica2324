@@ -19,7 +19,7 @@ public class Fuentes {
     // Estableix les fonts de l'App
     public void setFonts(PApplet p5){
         this.fonts = new PFont[3];
-        this.fonts[0] = p5.createFont("data/Super Daisy Personal Use.ttf", midaTitol);
+        this.fonts[0] = p5.createFont("data/KGRedHands.ttf", midaTitol);
         this.fonts[1] = p5.createFont("data/Super Fresh.otf", midaSubtitol);
         this.fonts[2] = p5.createFont("data/Zector.ttf", midaParagraf);
 

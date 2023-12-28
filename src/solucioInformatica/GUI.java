@@ -22,7 +22,8 @@ public class GUI {
     Boton logIn; Boton logo;
     Boton explora; Boton personaliza; Boton colección; Boton instrucciones;
     Boton visualiza; Boton visualiza2; Boton visualiza3; Boton visualiza4;
-
+    Boton ornTriangle; Boton ornCercle; Boton ornEstrella;
+    // Collar
     Collar collarPersonal;
 
 
@@ -67,6 +68,15 @@ public class GUI {
         visualiza4 = new Boton(p5, "VISUALIZA", marginH+600+200, 475+130, imagenCWidth+25, imagenCHeight-130);
         visualiza4.setColors(appColors.getColorAt(2), appColors.getColorAt(2), appColors.getColorAt(3), 155);
 
+        ornCercle = new Boton(p5,"CÍRCULO", marginH+700, 275, 200, imagenPHeight/4);
+        ornCercle.setColors(appColors.getColorAt(2), appColors.getColorAt(2), appColors.getColorAt(3), 155);
+
+        ornEstrella = new Boton(p5,"ESTRELLA", marginH+700, 409, 200, imagenPHeight/4);
+        ornEstrella.setColors(appColors.getColorAt(2), appColors.getColorAt(2), appColors.getColorAt(3), 155);
+
+        ornTriangle = new Boton(p5,"TRIÁNGULO", marginH+700, 543, 200, imagenPHeight/4);
+        ornTriangle.setColors(appColors.getColorAt(2), appColors.getColorAt(2), appColors.getColorAt(3), 155);
+
     }
 
     // PANTALLES DE LA GUI
@@ -110,7 +120,8 @@ public class GUI {
     public void dibuixaPantallaPersonalización(PApplet p5){
         p5.background(appColors.getColorAt(0));
         dibuixaLogo(p5);dibuixaBanner(p5, marginH, marginV);
-        dibuixaImatgePersonalizaciónCompra(p5, marginH, 275);
+        dibuixaImatgePersonalización(p5, marginH, 275);
+        ornCercle.display(p5); ornEstrella.display(p5); ornTriangle.display(p5);
         collarPersonal.display(p5);
     }
 
@@ -197,7 +208,7 @@ public class GUI {
 
     }
 
-    public void dibuixaImatgePersonalizaciónCompra(PApplet p5, float x, float y){
+    public void dibuixaImatgePersonalización(PApplet p5, float x, float y){
         float X = x; float Y = y;
         p5.fill(appColors.getColorAt(3));
         p5.rect(X, Y, imagenPWidth, imagenPHeight);
