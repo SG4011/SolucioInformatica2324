@@ -143,15 +143,15 @@ public class programaPrincipal extends PApplet {
 
         if(gui.pantallaActual==GUI.PANTALLA.PERSONALIZACIÓN){
             if(gui.ornCercle.mouseSobreBoto(this)){
-                Ornament o = new OrnamentCercle(width/2, height/2, 25, color(255, 0, 0));
+                Ornament o = new OrnamentCercle(3*imagenPWidth/4, height/2, 25, color(255, 0, 0));
                 gui.collarPersonal.addOrnament(o);
             }
             else if(gui.ornTriangle.mouseSobreBoto(this)){
-                Ornament o = new OrnamentTriangle(width/2, height/2, 25, color(0, 255, 0));
+                Ornament o = new OrnamentTriangle(3*imagenPWidth/4, height/2, 25, color(0, 255, 0));
                 gui.collarPersonal.addOrnament(o);
             }
             else if(gui.ornEstrella.mouseSobreBoto(this)){
-                Ornament o = new OrnamentEstrella(width/2, height/2, 50, color(255, 0, 255), 25, 10);
+                Ornament o = new OrnamentEstrella(3*imagenPWidth/4, height/2, 50, color(255, 0, 255), 25, 10);
                 gui.collarPersonal.addOrnament(o);
             }
         }
