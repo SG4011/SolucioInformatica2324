@@ -69,13 +69,13 @@ public class GUI {
         visualiza4.setColors(appColors.getColorAt(2), appColors.getColorAt(2), appColors.getColorAt(3), 155);
 
         ornCercle = new Boton(p5,"CÍRCULO", marginH+700, 275, 200, imagenPHeight/4);
-        ornCercle.setColors(appColors.getColorAt(2), appColors.getColorAt(2), appColors.getColorAt(3), 155);
+        ornCercle.setColors(appColors.getColorAt(0), appColors.getColorAt(2), appColors.getColorAt(3), 155);
 
         ornEstrella = new Boton(p5,"ESTRELLA", marginH+700, 409, 200, imagenPHeight/4);
-        ornEstrella.setColors(appColors.getColorAt(2), appColors.getColorAt(2), appColors.getColorAt(3), 155);
+        ornEstrella.setColors(appColors.getColorAt(0), appColors.getColorAt(2), appColors.getColorAt(3), 155);
 
         ornTriangle = new Boton(p5,"TRIÁNGULO", marginH+700, 543, 200, imagenPHeight/4);
-        ornTriangle.setColors(appColors.getColorAt(2), appColors.getColorAt(2), appColors.getColorAt(3), 155);
+        ornTriangle.setColors(appColors.getColorAt(0), appColors.getColorAt(2), appColors.getColorAt(3), 155);
 
     }
 
@@ -118,7 +118,7 @@ public class GUI {
     }
 
     public void dibuixaPantallaPersonalización(PApplet p5){
-        p5.background(appColors.getColorAt(0));
+        p5.background(appColors.getColorAt(3));
         dibuixaLogo(p5);dibuixaBanner(p5, marginH, marginV);
         dibuixaImatgePersonalización(p5, marginH, 275);
         ornCercle.display(p5); ornEstrella.display(p5); ornTriangle.display(p5);
