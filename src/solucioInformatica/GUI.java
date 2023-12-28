@@ -210,7 +210,7 @@ public class GUI {
 
     public void dibuixaImatgePersonalización(PApplet p5, float x, float y){
         float X = x; float Y = y;
-        p5.fill(appColors.getColorAt(3));
+        p5.fill(appColors.getFirstColor()); p5.stroke(0);
         p5.rect(X, Y, imagenPWidth, imagenPHeight);
         p5.text("imagen", X+150, y+150);
     }
@@ -228,6 +228,6 @@ public class GUI {
         p5.fill(appColors.getColorAt(4));
         p5.rect(X, Y, bannerWidth, bannerHeight);
         p5.fill(0); p5.textFont(fontsApp.getFontAt(0)); p5.textSize(midaTitol);
-        p5.text(pantallaActual + "("+pantallaActual.ordinal() +")", X + bannerWidth/2, Y + bannerHeight/2);
+        p5.text(pantallaActual + "", X + bannerWidth/2, Y + bannerHeight/2);
     }
 }

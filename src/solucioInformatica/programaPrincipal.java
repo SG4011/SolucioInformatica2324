@@ -2,6 +2,8 @@ package solucioInformatica;
 
 import processing.core.PApplet;
 
+import static solucioInformatica.Layout.*;
+
 public class programaPrincipal extends PApplet {
 
     // Interfície Gràfica (Pantalles i components)
@@ -112,7 +114,7 @@ public class programaPrincipal extends PApplet {
                 gui.pantallaActual = GUI.PANTALLA.COLECCIÓN;
             }
             else if(gui.personaliza.mouseSobreBoto(this)){
-                gui.collarPersonal = new Collar(20, width/2, height/2, 100, 200);
+                gui.collarPersonal = new Collar(20, imagenPWidth/2, imagenPHeight+75, 100, 200);
                 gui.pantallaActual = GUI.PANTALLA.PERSONALIZACIÓN;
             }
             else if(gui.instrucciones.mouseSobreBoto(this)){
