@@ -38,10 +38,10 @@ public class programaPrincipal extends PApplet {
             case COLECCIÓN:   gui.dibuixaPantallaColección(this);
                 break;
 
-            case EXPLORACIÓN:   gui.dibuixaPantallaExploración(this);
+            case EXPLORA:   gui.dibuixaPantallaExploración(this);
                 break;
 
-            case PERSONALIZACIÓN:   gui.dibuixaPantallaPersonalización(this);
+            case PERSONALIZA:   gui.dibuixaPantallaPersonalización(this);
                 break;
 
             case INSTRUCCIONES:     gui.dibuixaPantallaAbout(this);
@@ -64,16 +64,16 @@ public class programaPrincipal extends PApplet {
             gui.pantallaActual = GUI.PANTALLA.COLECCIÓN;
         }
         else if(key=='3'){
-            gui.pantallaActual = GUI.PANTALLA.EXPLORACIÓN;
+            gui.pantallaActual = GUI.PANTALLA.EXPLORA;
         }
         else if(key=='4'){
-            gui.pantallaActual = GUI.PANTALLA.PERSONALIZACIÓN;
+            gui.pantallaActual = GUI.PANTALLA.PERSONALIZA;
         }
         else if(key=='5'){
             gui.pantallaActual = GUI.PANTALLA.INSTRUCCIONES;
         }
 
-        if(gui.pantallaActual==GUI.PANTALLA.PERSONALIZACIÓN){
+        if(gui.pantallaActual==GUI.PANTALLA.PERSONALIZA){
             if(key=='a'){
                 int numRandom = floor(random(3));
                 Ornament o;
@@ -91,6 +91,7 @@ public class programaPrincipal extends PApplet {
 
         gui.username.keyPressed(key, keyCode);
         gui.password.keyPressed(key, keyCode);
+        gui.nomCollar.keyPressed(key, keyCode);
     }
 
     // ******************* MOUSE interaction ***************************** //
@@ -108,14 +109,14 @@ public class programaPrincipal extends PApplet {
         // Botons pantalla PRINCIPAL ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         if(gui.pantallaActual == GUI.PANTALLA.PRINCIPAL){
             if(gui.explora.mouseSobreBoto(this)){
-                gui.pantallaActual = GUI.PANTALLA.EXPLORACIÓN;
+                gui.pantallaActual = GUI.PANTALLA.EXPLORA;
             }
             else if(gui.colección.mouseSobreBoto(this)){
                 gui.pantallaActual = GUI.PANTALLA.COLECCIÓN;
             }
             else if(gui.personaliza.mouseSobreBoto(this)){
                 gui.collarPersonal = new Collar(20, imagenPWidth/2, imagenPHeight+75, 100, 200);
-                gui.pantallaActual = GUI.PANTALLA.PERSONALIZACIÓN;
+                gui.pantallaActual = GUI.PANTALLA.PERSONALIZA;
             }
             else if(gui.instrucciones.mouseSobreBoto(this)){
                 gui.pantallaActual = GUI.PANTALLA.INSTRUCCIONES;
@@ -137,11 +138,11 @@ public class programaPrincipal extends PApplet {
 
 
         // Botons pantalla PERSONALIZACIÓN ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        if(gui.pantallaActual==GUI.PANTALLA.PERSONALIZACIÓN){
+        if(gui.pantallaActual==GUI.PANTALLA.PERSONALIZA){
             gui.collarPersonal.checkDragged(this);
         }
 
-        if(gui.pantallaActual==GUI.PANTALLA.PERSONALIZACIÓN){
+        if(gui.pantallaActual==GUI.PANTALLA.PERSONALIZA){
             if(gui.ornCercle.mouseSobreBoto(this)){
                 Ornament o = new OrnamentCercle(3*imagenPWidth/4, height/2, 25, color(255, 0, 0));
                 gui.collarPersonal.addOrnament(o);
@@ -151,7 +152,7 @@ public class programaPrincipal extends PApplet {
                 gui.collarPersonal.addOrnament(o);
             }
             else if(gui.ornEstrella.mouseSobreBoto(this)){
-                Ornament o = new OrnamentEstrella(3*imagenPWidth/4, height/2, 50, color(255, 0, 255), 25, 10);
+                Ornament o = new OrnamentEstrella(3*imagenPWidth/4, height/2, 32, color(255, 0, 255), 20, 10);
                 gui.collarPersonal.addOrnament(o);
             }
         }
@@ -162,10 +163,11 @@ public class programaPrincipal extends PApplet {
 
         gui.username.isPressed(this);
         gui.password.isPressed(this);
+        gui.nomCollar.isPressed(this);
     }
 
     public void mouseDragged(){
-        if(gui.pantallaActual==GUI.PANTALLA.PERSONALIZACIÓN){
+        if(gui.pantallaActual==GUI.PANTALLA.PERSONALIZA){
             gui.collarPersonal.checkDragged(this);
         }
     }

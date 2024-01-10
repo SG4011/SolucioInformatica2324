@@ -8,7 +8,7 @@ import static solucioInformatica.Layout.*;
 public class GUI {
 
     // Enumerat de les Pantalles de l'App
-    public enum PANTALLA {INICIAL, PRINCIPAL, COLECCIÓN, EXPLORACIÓN, PERSONALIZACIÓN, INSTRUCCIONES};
+    public enum PANTALLA {INICIAL, PRINCIPAL, COLECCIÓN, EXPLORA, PERSONALIZA, INSTRUCCIONES};
     // Pantalla Actual
     public PANTALLA pantallaActual;
 
@@ -18,11 +18,13 @@ public class GUI {
     // Text Fields ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     TextField username;
     TextField password;
+    TextField nomCollar;
     // Botons +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     Boton logIn; Boton logo;
     Boton explora; Boton personaliza; Boton colección; Boton instrucciones;
     Boton visualiza; Boton visualiza2; Boton visualiza3; Boton visualiza4;
     Boton ornTriangle; Boton ornCercle; Boton ornEstrella;
+    Boton guardarCollar;
     // Collar
     Collar collarPersonal;
 
@@ -36,6 +38,7 @@ public class GUI {
         // Text Fields ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         username = new TextField(p5, 360, (int)(2*marginV), (int)inputWidth, (int)inputHeight);
         password = new TextField(p5, 360, (int)(8*marginV), (int)inputWidth, (int)inputHeight );
+        nomCollar = new TextField(p5, (int)(marginH+1000), 409, 200, (int)(imagenPHeight/4));
 
         // Botons +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         logIn = new Boton(p5, "LOG IN", 480, marginV+600, 320, 50);
@@ -69,13 +72,16 @@ public class GUI {
         visualiza4.setColors(appColors.getColorAt(2), appColors.getColorAt(2), appColors.getColorAt(3), 155);
 
         ornCercle = new Boton(p5,"CÍRCULO", marginH+700, 275, 200, imagenPHeight/4);
-        ornCercle.setColors(appColors.getColorAt(0), appColors.getColorAt(2), appColors.getColorAt(3), 155);
+        ornCercle.setColors(appColors.getColorAt(0), appColors.getColorAt(2), appColors.getColorAt(1), 155);
 
         ornEstrella = new Boton(p5,"ESTRELLA", marginH+700, 409, 200, imagenPHeight/4);
-        ornEstrella.setColors(appColors.getColorAt(0), appColors.getColorAt(2), appColors.getColorAt(3), 155);
+        ornEstrella.setColors(appColors.getColorAt(0), appColors.getColorAt(2), appColors.getColorAt(1), 155);
 
         ornTriangle = new Boton(p5,"TRIÁNGULO", marginH+700, 543, 200, imagenPHeight/4);
-        ornTriangle.setColors(appColors.getColorAt(0), appColors.getColorAt(2), appColors.getColorAt(3), 155);
+        ornTriangle.setColors(appColors.getColorAt(0), appColors.getColorAt(2), appColors.getColorAt(1), 155);
+
+        guardarCollar = new Boton(p5, "GUARDAR", marginH+1000, 543, 200, imagenPHeight/4);
+        guardarCollar.setColors(appColors.getColorAt(4), appColors.getColorAt(3), appColors.getColorAt(2), 155);
 
     }
 
@@ -122,6 +128,7 @@ public class GUI {
         dibuixaLogo(p5);dibuixaBanner(p5, marginH, marginV);
         dibuixaImatgePersonalización(p5, marginH, 275);
         ornCercle.display(p5); ornEstrella.display(p5); ornTriangle.display(p5);
+        guardarCollar.display(p5); nomCollar.display(p5);
         collarPersonal.display(p5);
     }
 
@@ -131,7 +138,7 @@ public class GUI {
     }
 
 
-    // ZONES DE LA GUI
+    // ZONES DE LA GUI (de diferents pantalles)
 
     public void dibuixaLogo(PApplet p5){
         logo.display(p5);
