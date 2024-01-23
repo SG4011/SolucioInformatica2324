@@ -135,6 +135,20 @@ public class GUI {
     public void dibuixaPantallaAbout(PApplet p5){
         p5.background(appColors.getColorAt(0));
         dibuixaLogo(p5); dibuixaBanner(p5, marginH, marginV);
+        p5.pushStyle();
+        p5.textSize(midaParagraf); p5.fill(appColors.getColorAt(4));
+        p5.textAlign(p5.LEFT);
+        float xt = marginH;
+        p5.text("1-Instrucciones para crear y personalizar un collar:", xt, bannerHeight+100);
+        p5.text("2-Cuando se encuentra en la pantalla principal, ir a PERSONALIZACIÓN",
+                xt, bannerHeight+150);
+        p5.text("3-Cuando se encuentra en la pantalla PERSONALIZACIÓN tiene 3 botones para crear joyas en función de su forma",
+                xt, bannerHeight+200);
+        p5.text("4-Elegir color de la joya", xt, bannerHeight+250);
+        p5.text("5-Pulsar el botón de la forma deseada y arrastrarlo para colocarlo donde se desee",
+                xt, bannerHeight+300);
+        p5.text("6-Una vez finalizada la creación, poner un nombre y GUARDAR", xt, bannerHeight+350);
+        p5.popStyle();
     }
 
 
