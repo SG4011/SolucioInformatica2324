@@ -8,6 +8,7 @@ public class programaPrincipal extends PApplet {
 
     // Interfície Gràfica (Pantalles i components)
     GUI gui;
+    DataBase bbdd;
 
     public static void main(String[] args) {
         PApplet.main("solucioInformatica.programaPrincipal", args);
@@ -23,6 +24,8 @@ public class programaPrincipal extends PApplet {
         noStroke();                         // Sense bordes
         textAlign(CENTER); textSize(18);   // Alineació i mida del text
         gui = new GUI(this);                   // Constructor de la GUI
+        bbdd = new DataBase("admin", "12345", "collares");
+        bbdd.connect();
     }
 
     public void draw(){
@@ -86,6 +89,7 @@ public class programaPrincipal extends PApplet {
                 gui.collarPersonal.addOrnament(o);
             }
         }
+
 
         //Text Fields Key Pressed ++++++++++++++++++++++++++++++++++++++++
 
