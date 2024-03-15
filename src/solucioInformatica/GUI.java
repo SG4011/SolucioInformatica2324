@@ -1,6 +1,7 @@
 package solucioInformatica;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 
 import static solucioInformatica.Medidas.*;
 import static solucioInformatica.Layout.*;
@@ -13,8 +14,14 @@ public class GUI {
     public PANTALLA pantallaActual;
 
     // Colors i Fonts de l'APP
-    Colores appColors;
+    Colores appColors; int[] arrayColors;
     Fuentes fontsApp;
+
+    // Fotos ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    PImage foto1;
+
+    // Select Color +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    SelectColor selectColor;
     // Text Fields ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     TextField username;
     TextField password;
@@ -28,17 +35,29 @@ public class GUI {
     // Collar
     Collar collarPersonal;
 
+    DataBase db;
+
 
     // Constructor de la GUI
-    public GUI(PApplet p5){
+    public GUI(PApplet p5, DataBase db){
         pantallaActual = PANTALLA.INICIAL;
+
+        this.db = db;
         appColors = new Colores(p5);   // Constructor dels colors de l'App
         fontsApp = new Fuentes(p5);     // Constructor de les fonts de l'App
 
+        // Fotos +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        foto1 = p5.loadImage("data/logo.png");
+
+        // Select Color++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        arrayColors = db.getColores(p5);
+        selectColor = new SelectColor(p5, arrayColors, marginH+1000, 275, 200, imagenPHeight/14);
+
         // Text Fields ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        username = new TextField(p5, 360, (int)(2*marginV), (int)inputWidth, (int)inputHeight);
-        password = new TextField(p5, 360, (int)(8*marginV), (int)inputWidth, (int)inputHeight );
-        nomCollar = new TextField(p5, (int)(marginH+1000), 409, 200, (int)(imagenPHeight/4));
+        username = new TextField(p5, 360, (int)(2*marginV), (int)inputWidth, (int)inputHeight, (int)midaSubtitol);
+        password = new TextField(p5, 360, (int)(8*marginV), (int)inputWidth, (int)inputHeight, (int)midaSubtitol );
+        nomCollar = new TextField(p5, (int)(marginH+1000), 409, 200, (int)(imagenPHeight/6), 25);
 
         // Botons +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         logIn = new Boton(p5, "LOG IN", 480, marginV+600, 320, 50);
@@ -91,6 +110,7 @@ public class GUI {
 
         p5.background(appColors.getColorAt(0));
         dibuixaLogo(p5);
+        p5.image(foto1, (float)1088.88-marginH, 10+marginV);
         dibuixaInput(p5);
         dibuixaImatge(p5,360, 14*marginV);
         logIn.display(p5);
@@ -99,6 +119,7 @@ public class GUI {
     public void dibuixaPantallaPrincipal(PApplet p5){
         p5.background(appColors.getColorAt(0));
         dibuixaLogo(p5);dibuixaBanner(p5, 3*marginH + logoWidth, marginV);
+        p5.image(foto1, (float)1088.8-marginH, 10+marginV);
         dibuixaImatge(p5, 300+marginH, 14*marginV);
 
         p5.textFont(fontsApp.getFontAt(1));
@@ -108,6 +129,7 @@ public class GUI {
     public void dibuixaPantallaColección(PApplet p5){
         p5.background(appColors.getColorAt(0));
         dibuixaLogo(p5);dibuixaBanner(p5, marginH, marginV);
+        p5.image(foto1, (float)1088.8-marginH, 10+marginV);
         dibuixaImatgeColecciónExploración1(p5, marginH, 275);
         dibuixaImatgeColecciónExploración12(p5, marginH, 475);
         dibuixaImatgeColecciónExploración123(p5, marginH+600, 275);
@@ -117,6 +139,7 @@ public class GUI {
     public void dibuixaPantallaExploración(PApplet p5){
         p5.background(appColors.getColorAt(0));
         dibuixaLogo(p5);dibuixaBanner(p5, marginH, marginV);
+        p5.image(foto1, (float)1088.8-marginH, 10+marginV);
         dibuixaImatgeColecciónExploración1(p5, marginH, 275);
         dibuixaImatgeColecciónExploración12(p5, marginH, 475);
         dibuixaImatgeColecciónExploración123(p5, marginH+600, 275);
@@ -126,17 +149,25 @@ public class GUI {
     public void dibuixaPantallaPersonalización(PApplet p5){
         p5.background(appColors.getColorAt(3));
         dibuixaLogo(p5);dibuixaBanner(p5, marginH, marginV);
+        p5.image(foto1, (float)1088.8-marginH, 10+marginV);
         dibuixaImatgePersonalización(p5, marginH, 275);
         ornCercle.display(p5); ornEstrella.display(p5); ornTriangle.display(p5);
         guardarCollar.display(p5); nomCollar.display(p5);
         collarPersonal.display(p5);
+        p5.pushStyle();
+        p5.textSize(12); p5.textAlign(p5.LEFT);
+        p5.text("Guarda el collar con un nombre", marginH+1000,500);
+        p5.text("Seleccione un color para la joya", marginH+1000, 350);
+        p5.popStyle();
+        selectColor.enabled = true; selectColor.display(p5);
     }
 
     public void dibuixaPantallaAbout(PApplet p5){
         p5.background(appColors.getColorAt(0));
         dibuixaLogo(p5); dibuixaBanner(p5, marginH, marginV);
+        p5.image(foto1, (float)1088.8-marginH, 10+marginV);
         p5.pushStyle();
-        p5.textSize(midaParagraf); p5.fill(appColors.getColorAt(4));
+        p5.textSize(midaPantallaPersonalizacion); p5.fill(appColors.getColorAt(3));
         p5.textAlign(p5.LEFT);
         float xt = marginH;
         p5.text("1-Instrucciones para crear y personalizar un collar:", xt, bannerHeight+100);

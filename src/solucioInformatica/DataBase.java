@@ -1,5 +1,7 @@
 package solucioInformatica;
 
+import processing.core.PApplet;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -88,18 +90,39 @@ public class DataBase {
         }
     }
 
-    // Retorna les dades de la columna NOM de la taula UNITAT
-    public String[] getColumnaNomTaulaUnitat(){
-        int numFiles = getNumRowsTaula("unitat");
+    // Retorna les dades de la columna idUsuario de la taula USUARIO
+    public String[] getColumnaidUsuarioTaulaUsuario(){
+        int numFiles = getNumRowsTaula("usuario");
         String[] info = new String[numFiles];
         try {
-            ResultSet rs = query.executeQuery( "SELECT nom FROM unitat ORDER BY nom ASC");
+            ResultSet rs = query.executeQuery( "SELECT idUsuario FROM usuario ORDER BY nom ASC");
             int nr = 0;
             while (rs.next()) {
-                info[nr] = rs.getString("nom");
+                info[nr] = rs.getString("idUsuario");
                 nr++;
             }
             return info;
+        }
+        catch(Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+    // Retorna les dades de les columnes RED, GREEN, BLUE de la taula COLOR
+    public int[] getColores(PApplet p5){
+        int numFiles = getNumRowsTaula("color");
+        int[] colores = new int[numFiles];
+        try {
+            ResultSet rs = query.executeQuery( "SELECT red AS R, green AS G, blue AS B FROM color c ORDER BY idColor ASC");
+            int nr = 0;
+            while (rs.next()) {
+                int r = rs.getInt("R");
+                int g = rs.getInt("G");
+                int b = rs.getInt("B");
+                colores[nr] = p5.color(r, g, b);
+                nr++;
+            }
+            return colores;
         }
         catch(Exception e) {
             System.out.println(e);

@@ -23,9 +23,11 @@ public class programaPrincipal extends PApplet {
     public void setup(){
         noStroke();                         // Sense bordes
         textAlign(CENTER); textSize(18);   // Alineació i mida del text
-        gui = new GUI(this);                   // Constructor de la GUI
+
         bbdd = new DataBase("admin", "12345", "collares");
         bbdd.connect();
+
+        gui = new GUI(this, bbdd);                   // Constructor de la GUI
     }
 
     public void draw(){
@@ -77,7 +79,7 @@ public class programaPrincipal extends PApplet {
         }
 
         if(gui.pantallaActual==GUI.PANTALLA.PERSONALIZA){
-            if(key=='a'){
+            if(key=='6'){
                 int numRandom = floor(random(3));
                 Ornament o;
                 switch (numRandom){
@@ -158,6 +160,14 @@ public class programaPrincipal extends PApplet {
             else if(gui.ornEstrella.mouseSobreBoto(this)){
                 Ornament o = new OrnamentEstrella(3*imagenPWidth/4, height/2, 32, color(255, 0, 255), 20, 10);
                 gui.collarPersonal.addOrnament(o);
+            }
+
+            else if(gui.selectColor.mouseOverSelect(this) && gui.selectColor.isEnabled()){
+                if(!gui.selectColor.isCollapsed()){
+                    gui.selectColor.update(this);
+                    gui.selectColor.update(this);
+                }
+                gui.selectColor.toggle();
             }
         }
 

@@ -20,13 +20,14 @@ public class TextField {
     boolean selected = false;
 
     // Constructor
-    public TextField(PApplet p5, int x, int y, int w, int h) {
+    public TextField(PApplet p5, int x, int y, int w, int h, int txtSize) {
         this.x = x; this.y = y; this.w = w; this.h = h;
-        this.bgColor = p5.color(140, 140, 140);
+        this.bgColor = p5.color(0xFFEAF2D7);
         this.fgColor = p5.color(0, 0, 0);
-        this.selectedColor = p5.color(190, 190, 60);
-        this.borderColor = p5.color(30, 30, 30);
-        this.borderWeight = 1;
+        this.selectedColor = p5.color(0xFFEFCFE3);
+        this.borderColor = p5.color(0xFFB3DEE2);
+        this.borderWeight = 3;
+        this.textSize = txtSize;
     }
 
     // Dibuixa el Camp de Text
