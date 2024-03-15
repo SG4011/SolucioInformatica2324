@@ -17,6 +17,9 @@ public class GUI {
     Colores appColors; int[] arrayColors;
     Fuentes fontsApp;
 
+    // PopUps +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    PopUp badLogIn;
+
     // Fotos ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     PImage foto1;
 
@@ -27,7 +30,7 @@ public class GUI {
     TextField password;
     TextField nomCollar;
     // Botons +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    Boton logIn; Boton logo;
+    Boton logIn; Boton logo; Boton logOut;
     Boton explora; Boton personaliza; Boton colección; Boton instrucciones;
     Boton visualiza; Boton visualiza2; Boton visualiza3; Boton visualiza4;
     Boton ornTriangle; Boton ornCercle; Boton ornEstrella;
@@ -46,6 +49,10 @@ public class GUI {
         appColors = new Colores(p5);   // Constructor dels colors de l'App
         fontsApp = new Fuentes(p5);     // Constructor de les fonts de l'App
 
+        // PopUp +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        badLogIn = new PopUp(p5, "ERROR", "Usuario o contraseña incorrectos", 330, 250, 600, 300, appColors);
+        badLogIn.setVisible(false);
+
         // Fotos +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         foto1 = p5.loadImage("data/logo.png");
 
@@ -62,6 +69,10 @@ public class GUI {
         // Botons +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         logIn = new Boton(p5, "LOG IN", 480, marginV+600, 320, 50);
         logIn.setColors(appColors.getColorAt(2), appColors.getColorAt(2), appColors.getColorAt(3), 155);
+        logIn.activado = false;
+
+        logOut = new Boton(p5, "LOG OUT", 1080-marginH, 600, sidebarWidth, sidebarHeight);
+        logOut.setColors(appColors.getColorAt(2), appColors.getColorAt(2), appColors.getColorAt(3), 155);
 
         instrucciones = new Boton(p5, "INSTRUCCIONES", marginH, 2*marginV + logoHeight + 105, sidebarWidth, sidebarHeight);
         instrucciones.setColors(appColors.getColorAt(2), appColors.getColorAt(2), appColors.getColorAt(3), 155);
@@ -109,27 +120,28 @@ public class GUI {
     public void dibuixaPantallaInicial(PApplet p5){
 
         p5.background(appColors.getColorAt(0));
-        dibuixaLogo(p5);
-        p5.image(foto1, (float)1088.88-marginH, 10+marginV);
+        dibuixaLogo(p5, foto1, (float)1088.88-marginH, 10+marginV);
         dibuixaInput(p5);
         dibuixaImatge(p5,360, 14*marginV);
         logIn.display(p5);
+        badLogIn.display(p5);
     }
 
     public void dibuixaPantallaPrincipal(PApplet p5){
         p5.background(appColors.getColorAt(0));
-        dibuixaLogo(p5);dibuixaBanner(p5, 3*marginH + logoWidth, marginV);
-        p5.image(foto1, (float)1088.8-marginH, 10+marginV);
+        dibuixaLogo(p5, foto1, (float)1088.8-marginH, 10+marginV);
+        dibuixaBanner(p5, 3*marginH + logoWidth, marginV);
         dibuixaImatge(p5, 300+marginH, 14*marginV);
 
         p5.textFont(fontsApp.getFontAt(1));
         dibuixaSideBar(p5);
+        logOut.display(p5);
     }
 
     public void dibuixaPantallaColección(PApplet p5){
         p5.background(appColors.getColorAt(0));
-        dibuixaLogo(p5);dibuixaBanner(p5, marginH, marginV);
-        p5.image(foto1, (float)1088.8-marginH, 10+marginV);
+        dibuixaLogo(p5, foto1, (float)1088.8-marginH, 10+marginV);
+        dibuixaBanner(p5, marginH, marginV);
         dibuixaImatgeColecciónExploración1(p5, marginH, 275);
         dibuixaImatgeColecciónExploración12(p5, marginH, 475);
         dibuixaImatgeColecciónExploración123(p5, marginH+600, 275);
@@ -138,8 +150,8 @@ public class GUI {
 
     public void dibuixaPantallaExploración(PApplet p5){
         p5.background(appColors.getColorAt(0));
-        dibuixaLogo(p5);dibuixaBanner(p5, marginH, marginV);
-        p5.image(foto1, (float)1088.8-marginH, 10+marginV);
+        dibuixaLogo(p5, foto1, (float)1088.8-marginH, 10+marginV);
+        dibuixaBanner(p5, marginH, marginV);
         dibuixaImatgeColecciónExploración1(p5, marginH, 275);
         dibuixaImatgeColecciónExploración12(p5, marginH, 475);
         dibuixaImatgeColecciónExploración123(p5, marginH+600, 275);
@@ -148,8 +160,8 @@ public class GUI {
 
     public void dibuixaPantallaPersonalización(PApplet p5){
         p5.background(appColors.getColorAt(3));
-        dibuixaLogo(p5);dibuixaBanner(p5, marginH, marginV);
-        p5.image(foto1, (float)1088.8-marginH, 10+marginV);
+        dibuixaLogo(p5, foto1, (float)1088.8-marginH, 10+marginV);
+        dibuixaBanner(p5, marginH, marginV);
         dibuixaImatgePersonalización(p5, marginH, 275);
         ornCercle.display(p5); ornEstrella.display(p5); ornTriangle.display(p5);
         guardarCollar.display(p5); nomCollar.display(p5);
@@ -164,29 +176,30 @@ public class GUI {
 
     public void dibuixaPantallaAbout(PApplet p5){
         p5.background(appColors.getColorAt(0));
-        dibuixaLogo(p5); dibuixaBanner(p5, marginH, marginV);
-        p5.image(foto1, (float)1088.8-marginH, 10+marginV);
+        dibuixaLogo(p5, foto1, (float)1088.8-marginH, 10+marginV);
+        dibuixaBanner(p5, marginH, marginV);
         p5.pushStyle();
         p5.textSize(midaPantallaPersonalizacion); p5.fill(appColors.getColorAt(3));
         p5.textAlign(p5.LEFT);
         float xt = marginH;
-        p5.text("1-Instrucciones para crear y personalizar un collar:", xt, bannerHeight+100);
-        p5.text("2-Cuando se encuentra en la pantalla principal, ir a PERSONALIZACIÓN",
+        p5.text("Instrucciones para crear y personalizar un collar:", xt, bannerHeight+100);
+        p5.text("1-Cuando se encuentra en la pantalla principal, ir a PERSONALIZACIÓN",
                 xt, bannerHeight+150);
-        p5.text("3-Cuando se encuentra en la pantalla PERSONALIZACIÓN tiene 3 botones para crear joyas en función de su forma",
+        p5.text("2-Cuando se encuentra en la pantalla PERSONALIZACIÓN tiene 3 botones para crear joyas en función de su forma",
                 xt, bannerHeight+200);
-        p5.text("4-Elegir color de la joya", xt, bannerHeight+250);
-        p5.text("5-Pulsar el botón de la forma deseada y arrastrarlo para colocarlo donde se desee",
+        p5.text("3-Elegir color de la joya", xt, bannerHeight+250);
+        p5.text("4-Pulsar el botón de la forma deseada y arrastrarlo para colocarlo donde se desee",
                 xt, bannerHeight+300);
-        p5.text("6-Una vez finalizada la creación, poner un nombre y GUARDAR", xt, bannerHeight+350);
+        p5.text("5-Una vez finalizada la creación, poner un nombre y GUARDAR", xt, bannerHeight+350);
         p5.popStyle();
     }
 
 
     // ZONES DE LA GUI (de diferents pantalles)
 
-    public void dibuixaLogo(PApplet p5){
+    public void dibuixaLogo(PApplet p5, PImage img, float x, float y){
         logo.display(p5);
+        p5.image(img, x, y);
     }
 
     public void dibuixaInput(PApplet p5){ // Pantalla inicial

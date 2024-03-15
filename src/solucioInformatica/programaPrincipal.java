@@ -59,7 +59,7 @@ public class programaPrincipal extends PApplet {
     // ******************* KEYBOARD interaction ***************************** //
 
     public void keyPressed(){
-        if(key=='0'){
+        /*if(key=='0'){
             gui.pantallaActual = GUI.PANTALLA.INICIAL;
         }
         else if(key=='1'){
@@ -90,7 +90,7 @@ public class programaPrincipal extends PApplet {
                 }
                 gui.collarPersonal.addOrnament(o);
             }
-        }
+        }*/
 
 
         //Text Fields Key Pressed ++++++++++++++++++++++++++++++++++++++++
@@ -105,12 +105,6 @@ public class programaPrincipal extends PApplet {
     public void mousePressed(){
 
         println("X: "+mouseX+", Y:"+mouseY);
-
-        if(gui.pantallaActual == GUI.PANTALLA.INICIAL){
-            if(gui.logIn.mouseSobreBoto(this)){
-                gui.pantallaActual = GUI.PANTALLA.PRINCIPAL;
-            }
-        }
 
         // Botons pantalla PRINCIPAL ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         if(gui.pantallaActual == GUI.PANTALLA.PRINCIPAL){
@@ -127,6 +121,10 @@ public class programaPrincipal extends PApplet {
             else if(gui.instrucciones.mouseSobreBoto(this)){
                 gui.pantallaActual = GUI.PANTALLA.INSTRUCCIONES;
             }
+            if(gui.logOut.mouseSobreBoto(this)){
+                gui.pantallaActual = GUI.PANTALLA.INICIAL;
+
+            }
         }
         // Botons pantalla INICAL +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         if(gui.pantallaActual == GUI.PANTALLA.INICIAL){
@@ -142,6 +140,26 @@ public class programaPrincipal extends PApplet {
             }
         }
 
+        String userName = gui.username.getText();
+        String password = gui.password.getText();
+
+        if(bbdd.isValidUser(userName, password)){
+            gui.logIn.activado = true;
+        }
+
+        else if(!bbdd.isValidUser(userName, password) && gui.logIn.mouseSobreBoto(this)){
+            gui.logIn.activado = false;
+            gui.badLogIn.setVisible(true);
+        }
+
+        if(gui.badLogIn.bAceptar.mouseSobreBoto(this)){
+            gui.badLogIn.setVisible(false);
+        }
+
+        if(gui.logIn.mouseSobreBoto(this) && gui.logIn.activado){
+            gui.pantallaActual = GUI.PANTALLA.PRINCIPAL;
+        }
+
 
         // Botons pantalla PERSONALIZACIÓN ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         if(gui.pantallaActual==GUI.PANTALLA.PERSONALIZA){
@@ -149,16 +167,17 @@ public class programaPrincipal extends PApplet {
         }
 
         if(gui.pantallaActual==GUI.PANTALLA.PERSONALIZA){
+            int x=gui.selectColor.getSelectedValue();
             if(gui.ornCercle.mouseSobreBoto(this)){
-                Ornament o = new OrnamentCercle(3*imagenPWidth/4, height/2, 25, color(255, 0, 0));
+                Ornament o = new OrnamentCercle(3*imagenPWidth/4, height/2, 25, x);
                 gui.collarPersonal.addOrnament(o);
             }
             else if(gui.ornTriangle.mouseSobreBoto(this)){
-                Ornament o = new OrnamentTriangle(3*imagenPWidth/4, height/2, 25, color(0, 255, 0));
+                Ornament o = new OrnamentTriangle(3*imagenPWidth/4, height/2, 25, x);
                 gui.collarPersonal.addOrnament(o);
             }
             else if(gui.ornEstrella.mouseSobreBoto(this)){
-                Ornament o = new OrnamentEstrella(3*imagenPWidth/4, height/2, 32, color(255, 0, 255), 20, 10);
+                Ornament o = new OrnamentEstrella(3*imagenPWidth/4, height/2, 32, x, 20, 10);
                 gui.collarPersonal.addOrnament(o);
             }
 

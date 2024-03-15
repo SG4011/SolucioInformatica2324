@@ -129,4 +129,18 @@ public class DataBase {
             return null;
         }
     }
+
+    // Determina si l'usuari i contrasenya introduits són a la base de dades
+    public boolean isValidUser(String userName, String password){
+        String q = "SELECT COUNT(*) AS n FROM usuario WHERE idUsuario = '"+userName+"' AND password='"+password+"'";
+        try {
+            ResultSet rs = query.executeQuery( q);
+            rs.next();
+            return rs.getInt("n")==1;
+        }
+        catch(Exception e) {
+            System.out.println(e);
+            return false;
+        }
+    }
 }
