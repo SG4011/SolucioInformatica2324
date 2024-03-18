@@ -143,4 +143,8 @@ public class DataBase {
             return false;
         }
     }
+
+    public void insertOrnament(Ornament o, int x, int y){
+
+    }
 }

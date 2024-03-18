@@ -19,6 +19,7 @@ public class GUI {
 
     // PopUps +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     PopUp badLogIn;
+    PopUp guardaCollar;
 
     // Fotos ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     PImage foto1;
@@ -33,8 +34,7 @@ public class GUI {
     Boton logIn; Boton logo; Boton logOut;
     Boton explora; Boton personaliza; Boton colección; Boton instrucciones;
     Boton visualiza; Boton visualiza2; Boton visualiza3; Boton visualiza4;
-    Boton ornTriangle; Boton ornCercle; Boton ornEstrella;
-    Boton guardarCollar;
+    Boton ornTriangle; Boton ornCercle; Boton ornEstrella; Boton guardarCollar;
     // Collar
     Collar collarPersonal;
 
@@ -52,6 +52,9 @@ public class GUI {
         // PopUp +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         badLogIn = new PopUp(p5, "ERROR", "Usuario o contraseña incorrectos", 330, 250, 600, 300, appColors);
         badLogIn.setVisible(false);
+
+        guardaCollar = new PopUp(p5, "ENHORABUENA!!!", "Collar guardado correctamente", 330, 250, 600, 300, appColors);
+        guardaCollar.setVisible(false);
 
         // Fotos +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         foto1 = p5.loadImage("data/logo.png");
@@ -172,6 +175,7 @@ public class GUI {
         p5.text("Seleccione un color para la joya", marginH+1000, 350);
         p5.popStyle();
         selectColor.enabled = true; selectColor.display(p5);
+        guardaCollar.display(p5);
     }
 
     public void dibuixaPantallaAbout(PApplet p5){

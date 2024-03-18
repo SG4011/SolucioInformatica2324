@@ -167,17 +167,19 @@ public class programaPrincipal extends PApplet {
         }
 
         if(gui.pantallaActual==GUI.PANTALLA.PERSONALIZA){
-            int x=gui.selectColor.getSelectedValue();
+            int colorOrnament=gui.selectColor.getSelectedValue();
+            float x = 3*imagenPWidth/4; float y = height/2;
             if(gui.ornCercle.mouseSobreBoto(this)){
-                Ornament o = new OrnamentCercle(3*imagenPWidth/4, height/2, 25, x);
+                Ornament o = new OrnamentCercle(x, y, 25, colorOrnament);
                 gui.collarPersonal.addOrnament(o);
+
             }
             else if(gui.ornTriangle.mouseSobreBoto(this)){
-                Ornament o = new OrnamentTriangle(3*imagenPWidth/4, height/2, 25, x);
+                Ornament o = new OrnamentTriangle(x, y, 25, colorOrnament);
                 gui.collarPersonal.addOrnament(o);
             }
             else if(gui.ornEstrella.mouseSobreBoto(this)){
-                Ornament o = new OrnamentEstrella(3*imagenPWidth/4, height/2, 32, x, 20, 10);
+                Ornament o = new OrnamentEstrella(x, y, 32, colorOrnament, 20, 10);
                 gui.collarPersonal.addOrnament(o);
             }
 
@@ -187,6 +189,12 @@ public class programaPrincipal extends PApplet {
                     gui.selectColor.update(this);
                 }
                 gui.selectColor.toggle();
+            }
+            if(gui.guardarCollar.mouseSobreBoto(this)){
+                gui.guardaCollar.setVisible(true);
+            }
+            else{
+                gui.guardaCollar.setVisible(false);
             }
         }
 
