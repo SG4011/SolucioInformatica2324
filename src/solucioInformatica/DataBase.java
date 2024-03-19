@@ -130,6 +130,20 @@ public class DataBase {
         }
     }
 
+    public String getIdColor(float r, float g, float b){
+        String id="";
+        String q = "SELECT idColor AS id FROM color c WHERE red = '"+r+"' AND green='"+g+"' AND blue='"+b+"'";
+        try {
+            ResultSet rs = query.executeQuery( q);
+            rs.next();
+            return String.valueOf(rs.getInt("id"));
+        }
+        catch(Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
     // Determina si l'usuari i contrasenya introduits són a la base de dades
     public boolean isValidUser(String userName, String password){
         String q = "SELECT COUNT(*) AS n FROM usuario WHERE idUsuario = '"+userName+"' AND password='"+password+"'";
@@ -144,7 +158,48 @@ public class DataBase {
         }
     }
 
-    public void insertOrnament(Ornament o, int x, int y){
+    void insertOrnament(String idCollar, String posX, String posY, String idColor, String idForma){
+        try {
+            String q = "INSERT INTO `ornaments` (`idOrnament`, `posX`, `posY`, `idCollar`, `idColor`, `idForma`) "+
+                        "VALUES (NULL, '"+ posX +"','" + posY +"', '"+idCollar +"', '"+idColor+"', '"+idForma+"');";
+            System.out.println(q);
+            query.execute(q);
+        }
+        catch(Exception e) {
+            System.out.println(e);
+        }
+    }
 
+    void insertCollariOrnaments(PApplet p5, Collar c, String idCollar){
+        try {
+            String q = "INSERT INTO `collar` (`idCollar`, `numOrnaments`) VALUES ('"+idCollar+"', '"+c.numOrnaments+"');";
+            System.out.println(q);
+            query.execute(q);
+
+            for(int i=0; i<c.numOrnaments; i++){
+                String posX = String.valueOf(c.ornaments[i].x);
+                String posY = String.valueOf(c.ornaments[i].y);
+                String forma ="";
+                if(c.ornaments[i] instanceof OrnamentCercle){
+                    forma ="1";
+                }
+                else if(c.ornaments[i] instanceof OrnamentTriangle){
+                    forma ="0";
+                }
+                else if(c.ornaments[i] instanceof OrnamentEstrella){
+                    forma ="2";
+                }
+
+                float r = p5.red(c.ornaments[i].color);
+                float g = p5.green(c.ornaments[i].color);
+                float b = p5.blue(c.ornaments[i].color);
+                String idColor = getIdColor(r, g, b);
+
+                insertOrnament(idCollar, posX, posY, idColor, forma);
+            }
+        }
+        catch(Exception e) {
+            System.out.println(e);
+        }
     }
 }

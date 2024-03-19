@@ -20,6 +20,7 @@ public class GUI {
     // PopUps +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     PopUp badLogIn;
     PopUp guardaCollar;
+    PopUp sinNombre;
 
     // Fotos ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     PImage foto1;
@@ -34,7 +35,7 @@ public class GUI {
     Boton logIn; Boton logo; Boton logOut;
     Boton explora; Boton personaliza; Boton colección; Boton instrucciones;
     Boton visualiza; Boton visualiza2; Boton visualiza3; Boton visualiza4;
-    Boton ornTriangle; Boton ornCercle; Boton ornEstrella; Boton guardarCollar;
+    Boton ornTriangle; Boton ornCercle; Boton ornEstrella; Boton guardarCollar; Boton borrar;
     // Collar
     Collar collarPersonal;
 
@@ -55,6 +56,9 @@ public class GUI {
 
         guardaCollar = new PopUp(p5, "ENHORABUENA!!!", "Collar guardado correctamente", 330, 250, 600, 300, appColors);
         guardaCollar.setVisible(false);
+
+        sinNombre = new PopUp(p5, "NO SE PUEDE GUARDAR", "ES NECESARIO PONER UN NOMBRE", 330, 250, 600, 300, appColors);
+        sinNombre.setVisible(false);
 
         // Fotos +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         foto1 = p5.loadImage("data/logo.png");
@@ -116,6 +120,8 @@ public class GUI {
         guardarCollar = new Boton(p5, "GUARDAR", marginH+1000, 543, 200, imagenPHeight/4);
         guardarCollar.setColors(appColors.getColorAt(4), appColors.getColorAt(3), appColors.getColorAt(2), 155);
 
+        borrar = new Boton(p5, "BORRAR", marginH+475, 543, 150, imagenPHeight/4);
+        borrar.setColors(appColors.getColorAt(4), appColors.getColorAt(3), appColors.getColorAt(2), 155);
     }
 
     // PANTALLES DE LA GUI
@@ -167,7 +173,7 @@ public class GUI {
         dibuixaBanner(p5, marginH, marginV);
         dibuixaImatgePersonalización(p5, marginH, 275);
         ornCercle.display(p5); ornEstrella.display(p5); ornTriangle.display(p5);
-        guardarCollar.display(p5); nomCollar.display(p5);
+        borrar.display(p5);guardarCollar.display(p5); nomCollar.display(p5);
         collarPersonal.display(p5);
         p5.pushStyle();
         p5.textSize(12); p5.textAlign(p5.LEFT);
@@ -175,7 +181,7 @@ public class GUI {
         p5.text("Seleccione un color para la joya", marginH+1000, 350);
         p5.popStyle();
         selectColor.enabled = true; selectColor.display(p5);
-        guardaCollar.display(p5);
+        guardaCollar.display(p5); sinNombre.display(p5);
     }
 
     public void dibuixaPantallaAbout(PApplet p5){

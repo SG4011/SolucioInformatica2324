@@ -167,20 +167,26 @@ public class programaPrincipal extends PApplet {
         }
 
         if(gui.pantallaActual==GUI.PANTALLA.PERSONALIZA){
+
             int colorOrnament=gui.selectColor.getSelectedValue();
             float x = 3*imagenPWidth/4; float y = height/2;
+            String idCollar = gui.nomCollar.getText();
+            String textFieldText = gui.nomCollar.getText();
+
             if(gui.ornCercle.mouseSobreBoto(this)){
                 Ornament o = new OrnamentCercle(x, y, 25, colorOrnament);
                 gui.collarPersonal.addOrnament(o);
-
+                gui.db.insertOrnament(idCollar, String.valueOf(10), String.valueOf(10), String.valueOf(colorOrnament), "1");
             }
             else if(gui.ornTriangle.mouseSobreBoto(this)){
                 Ornament o = new OrnamentTriangle(x, y, 25, colorOrnament);
                 gui.collarPersonal.addOrnament(o);
+                gui.db.insertOrnament(idCollar, String.valueOf(10), String.valueOf(10), String.valueOf(colorOrnament), "0");
             }
             else if(gui.ornEstrella.mouseSobreBoto(this)){
                 Ornament o = new OrnamentEstrella(x, y, 32, colorOrnament, 20, 10);
                 gui.collarPersonal.addOrnament(o);
+                gui.db.insertOrnament(idCollar, String.valueOf(10), String.valueOf(10), String.valueOf(colorOrnament), "3");
             }
 
             else if(gui.selectColor.mouseOverSelect(this) && gui.selectColor.isEnabled()){
@@ -190,8 +196,15 @@ public class programaPrincipal extends PApplet {
                 }
                 gui.selectColor.toggle();
             }
-            if(gui.guardarCollar.mouseSobreBoto(this)){
+            if(gui.guardarCollar.mouseSobreBoto(this) && textFieldText!=""){
+                gui.db.insertCollariOrnaments(this, gui.collarPersonal, idCollar);
                 gui.guardaCollar.setVisible(true);
+            }
+            else if(gui.guardarCollar.mouseSobreBoto(this) && textFieldText==""){
+                gui.sinNombre.setVisible(true);
+                if(gui.sinNombre.bAceptar.mouseSobreBoto(this)){
+                    gui.sinNombre.setVisible(false);
+                }
             }
             else{
                 gui.guardaCollar.setVisible(false);
