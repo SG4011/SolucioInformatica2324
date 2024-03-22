@@ -1,6 +1,7 @@
 package solucioInformatica;
 
 import processing.core.PApplet;
+import processing.core.PGraphics;
 import processing.core.PVector;
 
 import static processing.core.PConstants.TWO_PI;
@@ -44,6 +45,17 @@ public class OrnamentEstrella extends Ornament {
     }
 
     public void display(PApplet p5){
+        p5.pushStyle();
+        p5.fill(this.color);
+        p5.beginShape();
+        for(int i=0; i< punts.length; i++) {
+            p5.vertex(this.punts[i].x, this.punts[i].y);
+        }
+        p5.endShape(p5.CLOSE);
+        p5.popStyle();
+    }
+
+    public void display(PGraphics p5){
         p5.pushStyle();
         p5.fill(this.color);
         p5.beginShape();

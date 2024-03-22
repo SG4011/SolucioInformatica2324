@@ -8,6 +8,8 @@ public class programaPrincipal extends PApplet {
 
     // Interfície Gràfica (Pantalles i components)
     GUI gui;
+
+    // Base de dades
     DataBase bbdd;
 
     public static void main(String[] args) {
@@ -115,7 +117,7 @@ public class programaPrincipal extends PApplet {
                 gui.pantallaActual = GUI.PANTALLA.COLECCIÓN;
             }
             else if(gui.personaliza.mouseSobreBoto(this)){
-                gui.collarPersonal = new Collar(20, imagenPWidth/2, imagenPHeight+75, 100, 200);
+                gui.collarPersonal = new Collar(20, imagenPWidth/2, imagenPHeight+75, 100, 185);
                 gui.pantallaActual = GUI.PANTALLA.PERSONALIZA;
             }
             else if(gui.instrucciones.mouseSobreBoto(this)){
@@ -163,15 +165,12 @@ public class programaPrincipal extends PApplet {
 
         // Botons pantalla PERSONALIZACIÓN ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         if(gui.pantallaActual==GUI.PANTALLA.PERSONALIZA){
-            gui.collarPersonal.checkDragged(this);
-        }
 
-        if(gui.pantallaActual==GUI.PANTALLA.PERSONALIZA){
+            gui.collarPersonal.checkDragged(this);
 
             int colorOrnament=gui.selectColor.getSelectedValue();
             float x = 3*imagenPWidth/4; float y = height/2;
             String idCollar = gui.nomCollar.getText();
-            String textFieldText = gui.nomCollar.getText();
 
             if(gui.ornCercle.mouseSobreBoto(this)){
                 Ornament o = new OrnamentCercle(x, y, 25, colorOrnament);
@@ -192,22 +191,28 @@ public class programaPrincipal extends PApplet {
             else if(gui.selectColor.mouseOverSelect(this) && gui.selectColor.isEnabled()){
                 if(!gui.selectColor.isCollapsed()){
                     gui.selectColor.update(this);
-                    gui.selectColor.update(this);
                 }
                 gui.selectColor.toggle();
             }
-            if(gui.guardarCollar.mouseSobreBoto(this) && textFieldText!=""){
-                gui.db.insertCollariOrnaments(this, gui.collarPersonal, idCollar);
-                gui.guardaCollar.setVisible(true);
-            }
-            else if(gui.guardarCollar.mouseSobreBoto(this) && textFieldText==""){
-                gui.sinNombre.setVisible(true);
-                if(gui.sinNombre.bAceptar.mouseSobreBoto(this)){
-                    gui.sinNombre.setVisible(false);
+            else if(gui.guardarCollar.mouseSobreBoto(this)){
+
+                if(!gui.nomCollar.getText().equals("")) {
+                    gui.db.insertCollariOrnaments(this, gui.collarPersonal, idCollar);
+                    gui.guardaCollar.setVisible(true);
+                    gui.creaImagenCollar(this, gui.collarPersonal, idCollar);
+                }
+                else {
+                    gui.sinNombre.setVisible(true);
                 }
             }
-            else{
+            else if(gui.sinNombre.visible && gui.sinNombre.bAceptar.mouseSobreBoto(this)){
+                gui.sinNombre.setVisible(false);
+            }
+            else if(gui.guardaCollar.visible && gui.guardaCollar.bAceptar.mouseSobreBoto(this)){
                 gui.guardaCollar.setVisible(false);
+            }
+            else if(gui.borrar.mouseSobreBoto(this)){
+                gui.collarPersonal.deleteLastOrnament();
             }
         }
 

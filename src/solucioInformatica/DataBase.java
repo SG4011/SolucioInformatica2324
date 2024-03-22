@@ -202,4 +202,39 @@ public class DataBase {
             System.out.println(e);
         }
     }
+
+    public String[][] getInfoTaulaCollar(){
+        int numFiles = getNumRowsTaula("collar");
+        int numCols  = 2;
+        String[][] info = new String[numFiles][numCols];
+        try {
+            ResultSet rs = query.executeQuery( "SELECT * FROM collar");
+            int nr = 0;
+            while (rs.next()) {
+                info[nr][0] = String.valueOf(rs.getInt("idCollar"));
+                info[nr][1] = rs.getString("numOrnaments");
+                nr++;
+            }
+            return info;
+        }
+        catch(Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
+    public String getImagenCollar(){
+
+        String q = "SELECT idCollar FROM collar ORDER BY RAND()";
+        try {
+            ResultSet rs = query.executeQuery( q);
+            rs.next();
+            return rs.getString("idCollar")+ ".jpg";
+        }
+        catch(Exception e) {
+            System.out.println(e);
+            return "aaaa.jpg";
+        }
+    }
+
 }

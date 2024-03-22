@@ -30,6 +30,13 @@ public class Collar {
         }
     }
 
+    public void deleteLastOrnament(){
+        if(this.numOrnaments>0) {
+            this.ornaments[this.numOrnaments] = null;
+            this.numOrnaments--;
+        }
+    }
+
     public void display(PApplet p5){
         p5.pushStyle();
         p5.noFill(); p5.strokeWeight(3);

@@ -1,6 +1,7 @@
 package solucioInformatica;
 
 import processing.core.PApplet;
+import processing.core.PGraphics;
 import processing.core.PImage;
 
 import static solucioInformatica.Medidas.*;
@@ -38,6 +39,7 @@ public class GUI {
     Boton ornTriangle; Boton ornCercle; Boton ornEstrella; Boton guardarCollar; Boton borrar;
     // Collar
     Collar collarPersonal;
+    String imgNombreCentral;
 
     DataBase db;
 
@@ -47,6 +49,9 @@ public class GUI {
         pantallaActual = PANTALLA.INICIAL;
 
         this.db = db;
+
+        this.imgNombreCentral = db.getImagenCollar();
+
         appColors = new Colores(p5);   // Constructor dels colors de l'App
         fontsApp = new Fuentes(p5);     // Constructor de les fonts de l'App
 
@@ -221,11 +226,10 @@ public class GUI {
     }
 
     public void dibuixaImatge(PApplet p5, float x, float y){ // Pantalla inicial y principal
-        p5.fill(appColors.getColorAt(3));
+
+        PImage imgCollar = p5.loadImage(imgNombreCentral);
         float X = x; float Y = y;
-        p5.rect(X, Y, inputWidth, 320);
-        p5.fill(0); p5.textFont(fontsApp.getThirdFont()); p5.textSize(midaSubtitol);
-        p5.text("imagen", X+270, Y+160);
+        p5.image(imgCollar, X, Y, inputWidth, 320);
     }
 
     public void dibuixaImatgeColecciónExploración1(PApplet p5, float x, float y){ // Pantalla colección i exploración
@@ -304,5 +308,20 @@ public class GUI {
         p5.rect(X, Y, bannerWidth, bannerHeight);
         p5.fill(0); p5.textFont(fontsApp.getFontAt(0)); p5.textSize(midaTitol);
         p5.text(pantallaActual + "", X + bannerWidth/2, Y + bannerHeight/2);
+    }
+
+    public void creaImagenCollar(PApplet p5, Collar c, String nombreCollar){
+        PGraphics img = p5.createGraphics((int)imagenPWidth, (int)imagenPHeight);
+        img.beginDraw();
+        img.background(200);
+        img.translate(-marginH, -275); p5.noFill(); p5.strokeWeight(3);
+        img.ellipse(imagenPWidth/2, imagenPHeight+75, 200, 380);
+        for(int i=0; i<c.ornaments.length; i++){
+            if(c.ornaments[i]!=null) {
+                c.ornaments[i].display(img);
+            }
+        }
+        img.endDraw();
+        img.save("data/"+nombreCollar +".jpg");
     }
 }

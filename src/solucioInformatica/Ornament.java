@@ -1,6 +1,7 @@
 package solucioInformatica;
 
 import processing.core.PApplet;
+import processing.core.PGraphics;
 
 public class Ornament {
 
@@ -33,6 +34,15 @@ public class Ornament {
 
     public void display(PApplet p5){
         p5.pushStyle();
+        p5.fill(this.color);
+        p5.rect(this.x, this.y, this.mida, this.mida);
+        p5.popStyle();
+    }
+
+    public void display(PGraphics p5){
+        p5.pushStyle();
+        p5.stroke(0);
+        p5.strokeWeight(2);
         p5.fill(this.color);
         p5.rect(this.x, this.y, this.mida, this.mida);
         p5.popStyle();
