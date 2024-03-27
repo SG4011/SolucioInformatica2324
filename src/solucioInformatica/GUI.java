@@ -37,6 +37,7 @@ public class GUI {
     Boton explora; Boton personaliza; Boton colección; Boton instrucciones;
     Boton visualiza; Boton visualiza2; Boton visualiza3; Boton visualiza4;
     Boton ornTriangle; Boton ornCercle; Boton ornEstrella; Boton guardarCollar; Boton borrar;
+    Boton paginaSiguiente; Boton paginaAnterior;
     // Collar
     Collar collarPersonal;
     String imgNombreCentral;
@@ -127,12 +128,18 @@ public class GUI {
 
         borrar = new Boton(p5, "BORRAR", marginH+475, 543, 150, imagenPHeight/4);
         borrar.setColors(appColors.getColorAt(4), appColors.getColorAt(3), appColors.getColorAt(2), 155);
+
+        paginaSiguiente = new Boton (p5, ">", 1080-marginH+logoWidth/2, logoHeight+100, logoWidth/2-10, 300);
+        paginaSiguiente.setColors(appColors.getColorAt(4), appColors.getColorAt(3), appColors.getColorAt(2), 155);
+
+        paginaAnterior = new Boton (p5, "<", 1080-marginH, logoHeight+100, logoWidth/2-10, 300);
+        paginaAnterior.setColors(appColors.getColorAt(4), appColors.getColorAt(3), appColors.getColorAt(2), 155);
     }
+
 
     // PANTALLES DE LA GUI
 
     public void dibuixaPantallaInicial(PApplet p5){
-
         p5.background(appColors.getColorAt(0));
         dibuixaLogo(p5, foto1, (float)1088.88-marginH, 10+marginV);
         dibuixaInput(p5);
@@ -160,6 +167,8 @@ public class GUI {
         dibuixaImatgeColecciónExploración12(p5, marginH, 475);
         dibuixaImatgeColecciónExploración123(p5, marginH+600, 275);
         dibuixaImatgeColecciónExploración1234(p5, marginH+600, 475);
+        paginaSiguiente.display(p5);
+        paginaAnterior.display(p5);
     }
 
     public void dibuixaPantallaExploración(PApplet p5){
@@ -170,6 +179,8 @@ public class GUI {
         dibuixaImatgeColecciónExploración12(p5, marginH, 475);
         dibuixaImatgeColecciónExploración123(p5, marginH+600, 275);
         dibuixaImatgeColecciónExploración1234(p5, marginH+600, 475);
+        paginaSiguiente.display(p5);
+        paginaAnterior.display(p5);
     }
 
     public void dibuixaPantallaPersonalización(PApplet p5){
@@ -304,18 +315,29 @@ public class GUI {
 
     public void dibuixaBanner(PApplet p5, float x, float y){
         float X = x; float Y = y;
-        p5.fill(appColors.getColorAt(4));
-        p5.rect(X, Y, bannerWidth, bannerHeight);
+        p5.fill(appColors.getColorAt(4)); p5.stroke(appColors.getColorAt(3));
+        p5.strokeWeight(3);
+        p5.pushStyle();
+        p5.rect(marginV, marginH, 1240-logoWidth-marginV, bannerHeight);
         p5.fill(0); p5.textFont(fontsApp.getFontAt(0)); p5.textSize(midaTitol);
-        p5.text(pantallaActual + "", X + bannerWidth/2, Y + bannerHeight/2);
+        p5.textAlign(p5.LEFT);
+        if(pantallaActual == PANTALLA.PRINCIPAL){
+            p5.textFont(fontsApp.getFontAt(4));
+            p5.text("BIENVENIDO/A ;)", 2*marginV, 7*marginH);
+        }
+        else{
+            p5.text(pantallaActual + "", 2*marginV, 7*marginH);
+        }
+
+        p5.popStyle();
     }
 
     public void creaImagenCollar(PApplet p5, Collar c, String nombreCollar){
         PGraphics img = p5.createGraphics((int)imagenPWidth, (int)imagenPHeight);
         img.beginDraw();
-        img.background(200);
-        img.translate(-marginH, -275); p5.noFill(); p5.strokeWeight(3);
-        img.ellipse(imagenPWidth/2, imagenPHeight+75, 200, 380);
+        img.background(appColors.getColorAt(0));
+        img.translate(-marginH, -275); img.fill(appColors.getColorAt(0)); img.strokeWeight(3);
+        img.ellipse(imagenPWidth/2, imagenPHeight+75, 200, 375);
         for(int i=0; i<c.ornaments.length; i++){
             if(c.ornaments[i]!=null) {
                 c.ornaments[i].display(img);
