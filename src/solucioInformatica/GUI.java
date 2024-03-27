@@ -41,8 +41,16 @@ public class GUI {
     // Collar
     Collar collarPersonal;
     String imgNombreCentral;
-
     DataBase db;
+
+    int numCollars;
+    int numPagines;
+
+    int paginaActual = 1;
+    String[][] infoCollares;
+    PImage[] imgs;
+
+
 
 
     // Constructor de la GUI
@@ -134,7 +142,18 @@ public class GUI {
 
         paginaAnterior = new Boton (p5, "<", 1080-marginH, logoHeight+100, logoWidth/2-10, 300);
         paginaAnterior.setColors(appColors.getColorAt(4), appColors.getColorAt(3), appColors.getColorAt(2), 155);
+
+        numCollars = db.getNumRowsTaula("collar");
+        numPagines = numCollars/4;
+
+
+        if(numCollars%4 != 0){
+            numPagines++;
+        }
+
+        imgs = new PImage[4];
     }
+
 
 
     // PANTALLES DE LA GUI
@@ -163,24 +182,35 @@ public class GUI {
         p5.background(appColors.getColorAt(0));
         dibuixaLogo(p5, foto1, (float)1088.8-marginH, 10+marginV);
         dibuixaBanner(p5, marginH, marginV);
-        dibuixaImatgeColecciónExploración1(p5, marginH, 275);
-        dibuixaImatgeColecciónExploración12(p5, marginH, 475);
-        dibuixaImatgeColecciónExploración123(p5, marginH+600, 275);
-        dibuixaImatgeColecciónExploración1234(p5, marginH+600, 475);
+        dibuixaImatgeColecciónExploración1(p5, marginH, 275, imgs[0]);
+        dibuixaImatgeColecciónExploración12(p5, marginH, 475, imgs[1]);
+        dibuixaImatgeColecciónExploración123(p5, marginH+600, 275, imgs[2]);
+        dibuixaImatgeColecciónExploración1234(p5, marginH+600, 475, imgs[3]);
         paginaSiguiente.display(p5);
         paginaAnterior.display(p5);
+
+
+        p5.fill(0);
+        p5.text(paginaActual+"/"+numPagines, 1080-marginH+logoWidth/2, 475+165);
+
+        for(int i=0; i<4; i++){
+
+        }
+
     }
 
     public void dibuixaPantallaExploración(PApplet p5){
         p5.background(appColors.getColorAt(0));
         dibuixaLogo(p5, foto1, (float)1088.8-marginH, 10+marginV);
         dibuixaBanner(p5, marginH, marginV);
-        dibuixaImatgeColecciónExploración1(p5, marginH, 275);
-        dibuixaImatgeColecciónExploración12(p5, marginH, 475);
-        dibuixaImatgeColecciónExploración123(p5, marginH+600, 275);
-        dibuixaImatgeColecciónExploración1234(p5, marginH+600, 475);
+        dibuixaImatgeColecciónExploración1(p5, marginH, 275, imgs[0]);
+        dibuixaImatgeColecciónExploración12(p5, marginH, 475, imgs[1]);
+        dibuixaImatgeColecciónExploración123(p5, marginH+600, 275, imgs[2]);
+        dibuixaImatgeColecciónExploración1234(p5, marginH+600, 475, imgs[3]);
         paginaSiguiente.display(p5);
         paginaAnterior.display(p5);
+        p5.fill(0);
+        p5.text(paginaActual+"/"+numPagines, 1080-marginH+logoWidth/2, 475+165);
     }
 
     public void dibuixaPantallaPersonalización(PApplet p5){
@@ -243,58 +273,74 @@ public class GUI {
         p5.image(imgCollar, X, Y, inputWidth, 320);
     }
 
-    public void dibuixaImatgeColecciónExploración1(PApplet p5, float x, float y){ // Pantalla colección i exploración
+    public void dibuixaImatgeColecciónExploración1(PApplet p5, float x, float y, PImage img){ // Pantalla colección i exploración
         float X = x; float Y = y;
         p5.fill(appColors.getColorAt(3));
         p5.rect(X, Y, imagenCWidth, imagenCHeight);
         p5.fill(0); p5.textFont(fontsApp.getThirdFont()); p5.textSize(midaParagraf);
-        p5.text("imagen", X+75, Y+75);      // Imatge
+        // Imatge
+        p5.image(img, X, Y, imagenCWidth, imagenCHeight);
         p5.fill(appColors.getColorAt(1));
         p5.rect(X+200, Y, imagenCWidth+25, imagenCHeight-50); // Info de la imatge
         p5.fill(appColors.getColorAt(2));
         visualiza.display(p5);
-        p5.text("info", X+300,Y+75);
+        p5.text(infoCollares[0][0], X+300,Y+75);
     }
 
-    public void dibuixaImatgeColecciónExploración12(PApplet p5, float x, float y){ // Pantalla colección i exploración
-        float X = x; float Y = y;
-        p5.fill(appColors.getColorAt(3));
-        p5.rect(X, Y, imagenCWidth, imagenCHeight);
-        p5.fill(0); p5.textFont(fontsApp.getThirdFont()); p5.textSize(midaParagraf);
-        p5.text("imagen", X+75, Y+75);// Imatge
-        p5.fill(appColors.getColorAt(1));
-        p5.rect(X+200, Y, imagenCWidth+25, imagenCHeight-50); // Info de la imatge
-        p5.fill(appColors.getColorAt(2));
-        visualiza2.display(p5);
-        p5.text("info", X+300, Y+75);
-
-    }
-
-    public void dibuixaImatgeColecciónExploración123(PApplet p5, float x, float y){ // Pantalla colección i exploración
-        float X = x; float Y = y;
-        p5.fill(appColors.getColorAt(3));
-        p5.rect(X, Y, imagenCWidth, imagenCHeight);
-        p5.fill(0); p5.textFont(fontsApp.getThirdFont()); p5.textSize(midaParagraf);
-        p5.text("imagen", X+75, Y+75);      // Imatge
-        p5.fill(appColors.getColorAt(1));
-        p5.rect(X+200, Y, imagenCWidth+25, imagenCHeight-50); // Info de la imatge
-        p5.fill(appColors.getColorAt(2));
-        visualiza3.display(p5);
-        p5.text("info", X+300, Y+75);
+    public void dibuixaImatgeColecciónExploración12(PApplet p5, float x, float y, PImage img){ // Pantalla colección i exploración
+        if(img!=null) {
+            float X = x;
+            float Y = y;
+            p5.fill(appColors.getColorAt(3));
+            p5.rect(X, Y, imagenCWidth, imagenCHeight);
+            p5.fill(0);
+            p5.textFont(fontsApp.getThirdFont());
+            p5.textSize(midaParagraf);
+            p5.image(img, X, Y, imagenCWidth, imagenCHeight);
+            p5.fill(appColors.getColorAt(1));
+            p5.rect(X + 200, Y, imagenCWidth + 25, imagenCHeight - 50); // Info de la imatge
+            p5.fill(appColors.getColorAt(2));
+            visualiza2.display(p5);
+            p5.text(infoCollares[1][0], X + 300, Y + 75);
+        }
 
     }
 
-    public void dibuixaImatgeColecciónExploración1234(PApplet p5, float x, float y){ // Pantalla colección i exploración
-        float X = x; float Y = y;
-        p5.fill(appColors.getColorAt(3));
-        p5.rect(X, Y, imagenCWidth, imagenCHeight);
-        p5.fill(0); p5.textFont(fontsApp.getThirdFont()); p5.textSize(midaParagraf);
-        p5.text("imagen", X+75, Y+75);      // Imatge
-        p5.fill(appColors.getColorAt(1));
-        p5.rect(X+200, Y, imagenCWidth+25, imagenCHeight-50); // Info de la imatge
-        p5.fill(appColors.getColorAt(2));
-        visualiza4.display(p5);
-        p5.text("info", X+300, Y+75);
+    public void dibuixaImatgeColecciónExploración123(PApplet p5, float x, float y, PImage img){ // Pantalla colección i exploración
+        if(img!=null) {
+            float X = x;
+            float Y = y;
+            p5.fill(appColors.getColorAt(3));
+            p5.rect(X, Y, imagenCWidth, imagenCHeight);
+            p5.fill(0);
+            p5.textFont(fontsApp.getThirdFont());
+            p5.textSize(midaParagraf);
+            p5.image(img, X, Y, imagenCWidth, imagenCHeight);
+            p5.fill(appColors.getColorAt(1));
+            p5.rect(X + 200, Y, imagenCWidth + 25, imagenCHeight - 50); // Info de la imatge
+            p5.fill(appColors.getColorAt(2));
+            visualiza3.display(p5);
+            p5.text(infoCollares[2][0], X + 300, Y + 75);
+        }
+
+    }
+
+    public void dibuixaImatgeColecciónExploración1234(PApplet p5, float x, float y, PImage img){ // Pantalla colección i exploración
+        if(img!=null) {
+            float X = x;
+            float Y = y;
+            p5.fill(appColors.getColorAt(3));
+            p5.rect(X, Y, imagenCWidth, imagenCHeight);
+            p5.fill(0);
+            p5.textFont(fontsApp.getThirdFont());
+            p5.textSize(midaParagraf);
+            p5.image(img, X, Y, imagenCWidth, imagenCHeight);
+            p5.fill(appColors.getColorAt(1));
+            p5.rect(X + 200, Y, imagenCWidth + 25, imagenCHeight - 50); // Info de la imatge
+            p5.fill(appColors.getColorAt(2));
+            visualiza4.display(p5);
+            p5.text(infoCollares[3][0], X + 300, Y + 75);
+        }
 
     }
 
@@ -319,10 +365,9 @@ public class GUI {
         p5.strokeWeight(3);
         p5.pushStyle();
         p5.rect(marginV, marginH, 1240-logoWidth-marginV, bannerHeight);
-        p5.fill(0); p5.textFont(fontsApp.getFontAt(0)); p5.textSize(midaTitol);
+        p5.fill(0); p5.textFont(fontsApp.getFontAt(4)); p5.textSize(midaTitol);
         p5.textAlign(p5.LEFT);
         if(pantallaActual == PANTALLA.PRINCIPAL){
-            p5.textFont(fontsApp.getFontAt(4));
             p5.text("BIENVENIDO/A ;)", 2*marginV, 7*marginH);
         }
         else{
@@ -335,8 +380,8 @@ public class GUI {
     public void creaImagenCollar(PApplet p5, Collar c, String nombreCollar){
         PGraphics img = p5.createGraphics((int)imagenPWidth, (int)imagenPHeight);
         img.beginDraw();
-        img.background(appColors.getColorAt(0));
-        img.translate(-marginH, -275); img.fill(appColors.getColorAt(0)); img.strokeWeight(3);
+        img.background(appColors.getColorAt(3));
+        img.translate(-marginH, -275); img.fill(appColors.getColorAt(3)); img.strokeWeight(3);
         img.ellipse(imagenPWidth/2, imagenPHeight+75, 200, 375);
         for(int i=0; i<c.ornaments.length; i++){
             if(c.ornaments[i]!=null) {

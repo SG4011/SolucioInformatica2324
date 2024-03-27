@@ -53,6 +53,18 @@ public class DataBase {
         }
     }
 
+    public int getNumRowsQuery(String q){
+        try {
+            ResultSet rs = query.executeQuery( q);
+            rs.next();
+            return rs.getInt("n");
+        }
+        catch(Exception e) {
+            System.out.println(e);
+            return 0;
+        }
+    }
+
     // Retorna el número de columnes d'una taula de la base de dades
     public int getNumColsTaula(String nomTaula){
         try {
@@ -69,26 +81,6 @@ public class DataBase {
         }
     }
 
-    // Retorna les dades d'una taula en concret
-    public String[][] getInfoTaulaUnitat(){
-        int numFiles = getNumRowsTaula("unitat");
-        int numCols  = 2;
-        String[][] info = new String[numFiles][numCols];
-        try {
-            ResultSet rs = query.executeQuery( "SELECT * FROM unitat");
-            int nr = 0;
-            while (rs.next()) {
-                info[nr][0] = String.valueOf(rs.getInt("numero"));
-                info[nr][1] = rs.getString("nom");
-                nr++;
-            }
-            return info;
-        }
-        catch(Exception e) {
-            System.out.println(e);
-            return null;
-        }
-    }
 
     // Retorna les dades de la columna idUsuario de la taula USUARIO
     public String[] getColumnaidUsuarioTaulaUsuario(){
@@ -213,6 +205,30 @@ public class DataBase {
             while (rs.next()) {
                 info[nr][0] = String.valueOf(rs.getInt("idCollar"));
                 info[nr][1] = rs.getString("numOrnaments");
+                nr++;
+            }
+            return info;
+        }
+        catch(Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
+    public String[][] getInfoTaulaCollar(int pagina){
+        int offset = (pagina-1) * 4;
+        String qn = "SELECT COUNT(*) As n FROM (SELECT * FROM COLLAR LIMIT 4 OFFSET "+offset+ ") AS CN";
+        int numFiles = getNumRowsQuery(qn);
+        int numCols  = 2;
+        String[][] info = new String[numFiles][numCols];
+        try {
+            String q = "SELECT * FROM COLLAR LIMIT 4 OFFSET "+offset;
+            System.out.println(q);
+            ResultSet rs = query.executeQuery( q);
+            int nr = 0;
+            while (rs.next()) {
+                info[nr][0] = rs.getString("idCollar");
+                info[nr][1] = String.valueOf(rs.getInt("numOrnaments"));
                 nr++;
             }
             return info;

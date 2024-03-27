@@ -1,6 +1,7 @@
 package solucioInformatica;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 
 import static solucioInformatica.Layout.*;
 
@@ -112,9 +113,19 @@ public class programaPrincipal extends PApplet {
         if(gui.pantallaActual == GUI.PANTALLA.PRINCIPAL){
             if(gui.explora.mouseSobreBoto(this)){
                 gui.pantallaActual = GUI.PANTALLA.EXPLORA;
+                gui.infoCollares = gui.db.getInfoTaulaCollar(gui.paginaActual);
+                println("COLLARS PAGINA: "+ gui.infoCollares.length);
+                for(int i=0; i<gui.infoCollares.length; i++) {
+                    gui.imgs[i] = loadImage(gui.infoCollares[i][0] + ".jpg");
+                }
             }
             else if(gui.colección.mouseSobreBoto(this)){
                 gui.pantallaActual = GUI.PANTALLA.COLECCIÓN;
+                gui.infoCollares = gui.db.getInfoTaulaCollar(gui.paginaActual);
+                println("COLLARS PAGINA: "+ gui.infoCollares.length);
+                for(int i=0; i<gui.infoCollares.length; i++) {
+                    gui.imgs[i] = loadImage(gui.infoCollares[i][0] + ".jpg");
+                }
             }
             else if(gui.personaliza.mouseSobreBoto(this)){
                 gui.collarPersonal = new Collar(20, imagenPWidth/2, imagenPHeight+75, 100, 185);
@@ -213,6 +224,30 @@ public class programaPrincipal extends PApplet {
             }
             else if(gui.borrar.mouseSobreBoto(this)){
                 gui.collarPersonal.deleteLastOrnament();
+            }
+        }
+
+        // Botons pantalla EXPLORACIÓN I COLECCIÓN
+
+        if(gui.pantallaActual == GUI.PANTALLA.COLECCIÓN || gui.pantallaActual == GUI.PANTALLA.EXPLORA){
+            if(gui.paginaAnterior.mouseSobreBoto(this) && gui.paginaActual>1){
+                gui.paginaActual--;
+                gui.infoCollares = gui.db.getInfoTaulaCollar(gui.paginaActual);
+                println("COLLARS PAGINA: "+ gui.infoCollares.length);
+                gui.imgs = new PImage[4];
+                for(int i=0; i<gui.infoCollares.length; i++) {
+                    gui.imgs[i] = loadImage(gui.infoCollares[i][0] + ".jpg");
+                }
+            }
+
+            else if(gui.paginaSiguiente.mouseSobreBoto(this) && gui.paginaActual<gui.numPagines){
+                gui.paginaActual++;
+                gui.infoCollares = gui.db.getInfoTaulaCollar(gui.paginaActual);
+                println("COLLARS PAGINA: "+ gui.infoCollares.length);
+                gui.imgs = new PImage[4];
+                for(int i=0; i<gui.infoCollares.length; i++) {
+                    gui.imgs[i] = loadImage(gui.infoCollares[i][0] + ".jpg");
+                }
             }
         }
 
