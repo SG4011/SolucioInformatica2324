@@ -2,29 +2,29 @@ package solucioInformatica;
 
 public class Layout {
 
-    // Marges Horitzontal i Vertical
+    // Margenes Horizontal y Vertical
     public static float marginH = 20, marginV = 20;
 
-    // Dimensions Zona Lateral
+    // Dimensiones Zona Lateral
     public static float sidebarWidth  = 200, sidebarHeight = 100;
 
-    // Dimensions Logo
+    // Dimensiones Logo
     public static float logoWidth  = 200, logoHeight = 200;
 
-    // Dimensions Banner
+    // Dimensiones Banner
     public static float bannerWidth  = 640, bannerHeight = 200;
 
-    // Dimensions Columnes
+    // Dimensiones Columnes
     public static float columnWidth  = 505, columnHeight = 720;
 
-    // Dimensions Inputs Pantalla Principal
+    // Dimensiones Inputs Pantalla Principal
     public static float inputWidth = 540, inputHeight = 100;
 
-    // Dimensions Imatges Pantalla Colección y Exploración
-    public static float imagenCWidth = 175, imagenCHeight = 175;
+    // Dimensiones Imagenes Pantalla Colección y Exploración
+    public static float imageCWidth = 175, imageCHeight = 175;
 
-    // Dimensions Imatges Pantalla Personalización
-    public static float imagenPWidth = 640, imagenPHeight = 400;
+    // Dimensiones Imagenes Pantalla Personalización
+    public static float imagePWidth = 640, imagePHeight = 400;
 
 }
 

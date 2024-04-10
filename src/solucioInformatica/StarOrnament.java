@@ -6,50 +6,50 @@ import processing.core.PVector;
 
 import static processing.core.PConstants.TWO_PI;
 
-public class OrnamentEstrella extends Ornament {
+public class StarOrnament extends Ornament {
 
-    PVector[] punts;
-    int numPuntes;
-    float radiIntern;
+    PVector[] points;
+    int numTips;
+    float InternRadius;
     float stepAng;
 
-    public OrnamentEstrella(float x, float y, float m, int c, int ri, int np) {
+    public StarOrnament(float x, float y, float m, int c, int ri, int np) {
 
         super(x, y, m, c);
 
-        punts = new PVector[np];
-        this.numPuntes = np;
-        this.radiIntern = ri;
+        points = new PVector[np];
+        this.numTips = np;
+        this.InternRadius = ri;
         this.stepAng = TWO_PI / np;
 
-        calculaPunts();
+        calculatePoints();
     }
 
-    public void calculaPunts(){
-        for(int i=0; i<punts.length; i++){
-            float r = (i%2==0) ? this.mida : this.radiIntern;
+    public void calculatePoints(){
+        for(int i = 0; i< points.length; i++){
+            float r = (i%2==0) ? this.size : this.InternRadius;
             float xi = (float)(this.x + r*Math.cos(stepAng*i));
             float yi = (float)(this.y + r*Math.sin(stepAng*i));
-            punts[i] = new PVector(xi, yi);
+            points[i] = new PVector(xi, yi);
         }
     }
 
-    public void setPosicio(float x, float y){
+    public void setPosition(float x, float y){
         this.x = x; this.y = y;
-        calculaPunts();
+        calculatePoints();
     }
 
     public boolean mouseOver(PApplet p5){
         p5.println(p5.dist(this.x, this.y, p5.mouseX, p5.mouseY));
-        return p5.dist(this.x, this.y, p5.mouseX, p5.mouseY) < this.mida;
+        return p5.dist(this.x, this.y, p5.mouseX, p5.mouseY) < this.size;
     }
 
     public void display(PApplet p5){
         p5.pushStyle();
         p5.fill(this.color);
         p5.beginShape();
-        for(int i=0; i< punts.length; i++) {
-            p5.vertex(this.punts[i].x, this.punts[i].y);
+        for(int i = 0; i< points.length; i++) {
+            p5.vertex(this.points[i].x, this.points[i].y);
         }
         p5.endShape(p5.CLOSE);
         p5.popStyle();
@@ -59,8 +59,8 @@ public class OrnamentEstrella extends Ornament {
         p5.pushStyle();
         p5.fill(this.color);
         p5.beginShape();
-        for(int i=0; i< punts.length; i++) {
-            p5.vertex(this.punts[i].x, this.punts[i].y);
+        for(int i = 0; i< points.length; i++) {
+            p5.vertex(this.points[i].x, this.points[i].y);
         }
         p5.endShape(p5.CLOSE);
         p5.popStyle();

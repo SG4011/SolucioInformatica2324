@@ -6,21 +6,21 @@ import processing.core.PGraphics;
 public class Ornament {
 
     float x, y;
-    float mida;
+    float size;
     int color;
 
     public Ornament(float x, float y, float m, int c){
         this.x = x; this.y = y;
-        this.mida = m;
+        this.size = m;
         this.color = c;
     }
 
-    public void setPosicio(float x, float y){
+    public void setPosition(float x, float y){
         this.x = x; this.y = y;
     }
 
-    public void setMida(float m){
-        this.mida = m;
+    public void setSize(float m){
+        this.size = m;
     }
 
     public void setColor(int c){
@@ -28,14 +28,14 @@ public class Ornament {
     }
 
     public boolean mouseOver(PApplet p5){
-        return p5.mouseX >= this.x && p5.mouseX <= (this.x + this.mida) &&
-                p5.mouseY >= this.y && p5.mouseY <= (this.y +  this.mida);
+        return p5.mouseX >= this.x && p5.mouseX <= (this.x + this.size) &&
+                p5.mouseY >= this.y && p5.mouseY <= (this.y +  this.size);
     }
 
     public void display(PApplet p5){
         p5.pushStyle();
         p5.fill(this.color);
-        p5.rect(this.x, this.y, this.mida, this.mida);
+        p5.rect(this.x, this.y, this.size, this.size);
         p5.popStyle();
     }
 
@@ -44,7 +44,7 @@ public class Ornament {
         p5.stroke(0);
         p5.strokeWeight(2);
         p5.fill(this.color);
-        p5.rect(this.x, this.y, this.mida, this.mida);
+        p5.rect(this.x, this.y, this.size, this.size);
         p5.popStyle();
     }
 }

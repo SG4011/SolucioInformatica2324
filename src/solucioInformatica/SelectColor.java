@@ -6,14 +6,14 @@ import java.awt.*;
 
 public class SelectColor {
 
-    float x, y, w, h;          // Posició i dimensions
-    int[] colors;            // Valors possibles
-    int selectedValue;       // Valor Seleccionat
+    float x, y, w, h;          // Posición y dimensiones
+    int[] colors;            // Valores posibles
+    int selectedValue;       // Valor Seleccionado
 
-    boolean collapsed = true;  // Plegat / Desplegat
-    boolean enabled;           // Abilitat / desabilitat
+    boolean collapsed = true;  // Plegado / Desplegado
+    boolean enabled;           // Habilitado / Deshabilitado
 
-    float lineSpace = 15;      // Espai entre línies
+    float lineSpace = 15;      // Espacio entre líneas
 
     public SelectColor(PApplet p5, int[] colors, float x, float y, float w, float h){
 
@@ -80,7 +80,7 @@ public class SelectColor {
         selectedValue = colors[option];
     }
 
-    // Indica si el cursor està sobre el select
+    // Indica si el cursor está sobre el select
     public boolean mouseOverSelect(PApplet p5){
         if(this.collapsed){
             return (p5.mouseX >= x) &&

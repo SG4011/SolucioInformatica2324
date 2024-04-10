@@ -7,10 +7,10 @@ import static solucioInformatica.Layout.*;
 
 public class programaPrincipal extends PApplet {
 
-    // Interfície Gràfica (Pantalles i components)
+    // Interfície Gráfica (Pantallas y componentes)
     GUI gui;
 
-    // Base de dades
+    // Base de datos
     DataBase bbdd;
 
     public static void main(String[] args) {
@@ -24,8 +24,8 @@ public class programaPrincipal extends PApplet {
     }
 
     public void setup(){
-        noStroke();                         // Sense bordes
-        textAlign(CENTER); textSize(18);   // Alineació i mida del text
+        noStroke();                         // Sine bordes
+        textAlign(CENTER); textSize(18);   // Alineación y medida del texto
 
         bbdd = new DataBase("admin", "12345", "collares");
         bbdd.connect();
@@ -35,24 +35,24 @@ public class programaPrincipal extends PApplet {
 
     public void draw(){
 
-        // Dibuixa la pantalla corresponent
-        switch(gui.pantallaActual){
-            case INICIAL:   gui.dibuixaPantallaInicial(this);
+        // Dibuja la pantalla correspondiente
+        switch(gui.actualScreen){
+            case INICIAL:   gui.drawInitialScreen(this);
                 break;
 
-            case PRINCIPAL:     gui.dibuixaPantallaPrincipal(this);
+            case PRINCIPAL:     gui.drawPrincipalScreen(this);
                 break;
 
-            case COLECCIÓN:   gui.dibuixaPantallaColección(this);
+            case COLECCIÓN:   gui.drawCollectionScreen(this);
                 break;
 
-            case EXPLORA:   gui.dibuixaPantallaExploración(this);
+            case EXPLORA:   gui.drawExplorationScreen(this);
                 break;
 
-            case PERSONALIZA:   gui.dibuixaPantallaPersonalización(this);
+            case PERSONALIZA:   gui.drawCustomScreen(this);
                 break;
 
-            case INSTRUCCIONES:     gui.dibuixaPantallaAbout(this);
+            case INSTRUCCIONES:     gui.drawInfoScreen(this);
                 break;
         }
 
@@ -62,45 +62,12 @@ public class programaPrincipal extends PApplet {
     // ******************* KEYBOARD interaction ***************************** //
 
     public void keyPressed(){
-        /*if(key=='0'){
-            gui.pantallaActual = GUI.PANTALLA.INICIAL;
-        }
-        else if(key=='1'){
-            gui.pantallaActual = GUI.PANTALLA.PRINCIPAL;
-        }
-        else if(key=='2'){
-            gui.pantallaActual = GUI.PANTALLA.COLECCIÓN;
-        }
-        else if(key=='3'){
-            gui.pantallaActual = GUI.PANTALLA.EXPLORA;
-        }
-        else if(key=='4'){
-            gui.pantallaActual = GUI.PANTALLA.PERSONALIZA;
-        }
-        else if(key=='5'){
-            gui.pantallaActual = GUI.PANTALLA.INSTRUCCIONES;
-        }
-
-        if(gui.pantallaActual==GUI.PANTALLA.PERSONALIZA){
-            if(key=='6'){
-                int numRandom = floor(random(3));
-                Ornament o;
-                switch (numRandom){
-                    case 0: o= new OrnamentCercle(width/2, height/2, 25, color(255, 0, 0)); break;
-                    case 1: o = new OrnamentTriangle(width/2, height/2, 25, color(0, 255, 0)); break;
-                    case 2: o = new OrnamentEstrella(width/2, height/2, 50, color(255, 0, 255), 25, 10); break;
-                    default: o = new Ornament(width/2, height/2, 25, color(100)); break;
-                }
-                gui.collarPersonal.addOrnament(o);
-            }
-        }*/
-
 
         //Text Fields Key Pressed ++++++++++++++++++++++++++++++++++++++++
 
         gui.username.keyPressed(key, keyCode);
         gui.password.keyPressed(key, keyCode);
-        gui.nomCollar.keyPressed(key, keyCode);
+        gui.necklaceName.keyPressed(key, keyCode);
     }
 
     // ******************* MOUSE interaction ***************************** //
@@ -109,47 +76,47 @@ public class programaPrincipal extends PApplet {
 
         println("X: "+mouseX+", Y:"+mouseY);
 
-        // Botons pantalla PRINCIPAL ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        if(gui.pantallaActual == GUI.PANTALLA.PRINCIPAL){
-            if(gui.explora.mouseSobreBoto(this)){
-                gui.pantallaActual = GUI.PANTALLA.EXPLORA;
-                gui.infoCollares = gui.db.getInfoTaulaCollar(gui.paginaActual);
-                println("COLLARS PAGINA: "+ gui.infoCollares.length);
-                for(int i=0; i<gui.infoCollares.length; i++) {
-                    gui.imgs[i] = loadImage(gui.infoCollares[i][0] + ".jpg");
+        // Botones pantalla PRINCIPAL ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        if(gui.actualScreen == GUI.SCREEN.PRINCIPAL){
+            if(gui.explore.mouseOnButton(this)){
+                gui.actualScreen = GUI.SCREEN.EXPLORA;
+                gui.infoNecklaces = gui.db.getInfoNecklaceTable(gui.actualPage);
+                println("COLLARS PAGINA: "+ gui.infoNecklaces.length);
+                for(int i = 0; i<gui.infoNecklaces.length; i++) {
+                    gui.imgs[i] = loadImage(gui.infoNecklaces[i][0] + ".jpg");
                 }
             }
-            else if(gui.colección.mouseSobreBoto(this)){
-                gui.pantallaActual = GUI.PANTALLA.COLECCIÓN;
-                gui.infoCollares = gui.db.getInfoTaulaCollar(gui.paginaActual);
-                println("COLLARS PAGINA: "+ gui.infoCollares.length);
-                for(int i=0; i<gui.infoCollares.length; i++) {
-                    gui.imgs[i] = loadImage(gui.infoCollares[i][0] + ".jpg");
+            else if(gui.colection.mouseOnButton(this)){
+                gui.actualScreen = GUI.SCREEN.COLECCIÓN;
+                gui.infoNecklaces = gui.db.getInfoNecklaceTable(gui.actualPage);
+                println("COLLARS PAGINA: "+ gui.infoNecklaces.length);
+                for(int i = 0; i<gui.infoNecklaces.length; i++) {
+                    gui.imgs[i] = loadImage(gui.infoNecklaces[i][0] + ".jpg");
                 }
             }
-            else if(gui.personaliza.mouseSobreBoto(this)){
-                gui.collarPersonal = new Collar(20, imagenPWidth/2, imagenPHeight+75, 100, 185);
-                gui.pantallaActual = GUI.PANTALLA.PERSONALIZA;
+            else if(gui.custom.mouseOnButton(this)){
+                gui.personalNecklace = new Necklace(20, imagePWidth /2, imagePHeight +75, 100, 185);
+                gui.actualScreen = GUI.SCREEN.PERSONALIZA;
             }
-            else if(gui.instrucciones.mouseSobreBoto(this)){
-                gui.pantallaActual = GUI.PANTALLA.INSTRUCCIONES;
+            else if(gui.instructions.mouseOnButton(this)){
+                gui.actualScreen = GUI.SCREEN.INSTRUCCIONES;
             }
-            if(gui.logOut.mouseSobreBoto(this)){
-                gui.pantallaActual = GUI.PANTALLA.INICIAL;
+            if(gui.logOut.mouseOnButton(this)){
+                gui.actualScreen = GUI.SCREEN.INICIAL;
 
             }
         }
-        // Botons pantalla INICAL +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        if(gui.pantallaActual == GUI.PANTALLA.INICIAL){
-            gui.logo.activado = false;
+        // Botones pantalla INICAL +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        if(gui.actualScreen == GUI.SCREEN.INICIAL){
+            gui.logo.activated = false;
         }
         else{
-            gui.logo.activado = true;
+            gui.logo.activated = true;
         }
 
-        if(gui.pantallaActual!=GUI.PANTALLA.INICIAL){
-            if(gui.logo.mouseSobreBoto(this)){
-                gui.pantallaActual = GUI.PANTALLA.PRINCIPAL;
+        if(gui.actualScreen != GUI.SCREEN.INICIAL){
+            if(gui.logo.mouseOnButton(this)){
+                gui.actualScreen = GUI.SCREEN.PRINCIPAL;
             }
         }
 
@@ -157,45 +124,45 @@ public class programaPrincipal extends PApplet {
         String password = gui.password.getText();
 
         if(bbdd.isValidUser(userName, password)){
-            gui.logIn.activado = true;
+            gui.logIn.activated = true;
         }
 
-        else if(!bbdd.isValidUser(userName, password) && gui.logIn.mouseSobreBoto(this)){
-            gui.logIn.activado = false;
+        else if(!bbdd.isValidUser(userName, password) && gui.logIn.mouseOnButton(this)){
+            gui.logIn.activated = false;
             gui.badLogIn.setVisible(true);
         }
 
-        if(gui.badLogIn.bAceptar.mouseSobreBoto(this)){
+        if(gui.badLogIn.bAccept.mouseOnButton(this)){
             gui.badLogIn.setVisible(false);
         }
 
-        if(gui.logIn.mouseSobreBoto(this) && gui.logIn.activado){
-            gui.pantallaActual = GUI.PANTALLA.PRINCIPAL;
+        if(gui.logIn.mouseOnButton(this) && gui.logIn.activated){
+            gui.actualScreen = GUI.SCREEN.PRINCIPAL;
         }
 
 
-        // Botons pantalla PERSONALIZACIÓN ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        if(gui.pantallaActual==GUI.PANTALLA.PERSONALIZA){
+        // Botones pantalla PERSONALIZACIÓN ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        if(gui.actualScreen == GUI.SCREEN.PERSONALIZA){
 
-            gui.collarPersonal.checkDragged(this);
+            gui.personalNecklace.checkDragged(this);
 
             int colorOrnament=gui.selectColor.getSelectedValue();
-            float x = 3*imagenPWidth/4; float y = height/2;
-            String idCollar = gui.nomCollar.getText();
+            float x = 3* imagePWidth /4; float y = height/2;
+            String idCollar = gui.necklaceName.getText();
 
-            if(gui.ornCercle.mouseSobreBoto(this)){
-                Ornament o = new OrnamentCercle(x, y, 25, colorOrnament);
-                gui.collarPersonal.addOrnament(o);
+            if(gui.ornCircle.mouseOnButton(this)){
+                Ornament o = new RoundOrnament(x, y, 25, colorOrnament);
+                gui.personalNecklace.addOrnament(o);
                 gui.db.insertOrnament(idCollar, String.valueOf(10), String.valueOf(10), String.valueOf(colorOrnament), "1");
             }
-            else if(gui.ornTriangle.mouseSobreBoto(this)){
-                Ornament o = new OrnamentTriangle(x, y, 25, colorOrnament);
-                gui.collarPersonal.addOrnament(o);
+            else if(gui.ornTriangle.mouseOnButton(this)){
+                Ornament o = new TriangleOrnament(x, y, 25, colorOrnament);
+                gui.personalNecklace.addOrnament(o);
                 gui.db.insertOrnament(idCollar, String.valueOf(10), String.valueOf(10), String.valueOf(colorOrnament), "0");
             }
-            else if(gui.ornEstrella.mouseSobreBoto(this)){
-                Ornament o = new OrnamentEstrella(x, y, 32, colorOrnament, 20, 10);
-                gui.collarPersonal.addOrnament(o);
+            else if(gui.ornStar.mouseOnButton(this)){
+                Ornament o = new StarOrnament(x, y, 32, colorOrnament, 20, 10);
+                gui.personalNecklace.addOrnament(o);
                 gui.db.insertOrnament(idCollar, String.valueOf(10), String.valueOf(10), String.valueOf(colorOrnament), "3");
             }
 
@@ -205,48 +172,48 @@ public class programaPrincipal extends PApplet {
                 }
                 gui.selectColor.toggle();
             }
-            else if(gui.guardarCollar.mouseSobreBoto(this)){
+            else if(gui.saveNecklace.mouseOnButton(this)){
 
-                if(!gui.nomCollar.getText().equals("")) {
-                    gui.db.insertCollariOrnaments(this, gui.collarPersonal, idCollar);
-                    gui.guardaCollar.setVisible(true);
-                    gui.creaImagenCollar(this, gui.collarPersonal, idCollar);
+                if(!gui.necklaceName.getText().equals("")) {
+                    gui.db.insertNecklaceAndOrnaments(this, gui.personalNecklace, idCollar);
+                    gui.savedNecklace.setVisible(true);
+                    gui.createNecklaceImg(this, gui.personalNecklace, idCollar);
                 }
                 else {
-                    gui.sinNombre.setVisible(true);
+                    gui.noName.setVisible(true);
                 }
             }
-            else if(gui.sinNombre.visible && gui.sinNombre.bAceptar.mouseSobreBoto(this)){
-                gui.sinNombre.setVisible(false);
+            else if(gui.noName.visible && gui.noName.bAccept.mouseOnButton(this)){
+                gui.noName.setVisible(false);
             }
-            else if(gui.guardaCollar.visible && gui.guardaCollar.bAceptar.mouseSobreBoto(this)){
-                gui.guardaCollar.setVisible(false);
+            else if(gui.savedNecklace.visible && gui.savedNecklace.bAccept.mouseOnButton(this)){
+                gui.savedNecklace.setVisible(false);
             }
-            else if(gui.borrar.mouseSobreBoto(this)){
-                gui.collarPersonal.deleteLastOrnament();
+            else if(gui.delete.mouseOnButton(this)){
+                gui.personalNecklace.deleteLastOrnament();
             }
         }
 
-        // Botons pantalla EXPLORACIÓN I COLECCIÓN
+        // Botones pantalla EXPLORACIÓN y COLECCIÓN
 
-        if(gui.pantallaActual == GUI.PANTALLA.COLECCIÓN || gui.pantallaActual == GUI.PANTALLA.EXPLORA){
-            if(gui.paginaAnterior.mouseSobreBoto(this) && gui.paginaActual>1){
-                gui.paginaActual--;
-                gui.infoCollares = gui.db.getInfoTaulaCollar(gui.paginaActual);
-                println("COLLARS PAGINA: "+ gui.infoCollares.length);
+        if(gui.actualScreen == GUI.SCREEN.COLECCIÓN || gui.actualScreen == GUI.SCREEN.EXPLORA){
+            if(gui.prevPage.mouseOnButton(this) && gui.actualPage >1){
+                gui.actualPage--;
+                gui.infoNecklaces = gui.db.getInfoNecklaceTable(gui.actualPage);
+                println("COLLARS PAGINA: "+ gui.infoNecklaces.length);
                 gui.imgs = new PImage[4];
-                for(int i=0; i<gui.infoCollares.length; i++) {
-                    gui.imgs[i] = loadImage(gui.infoCollares[i][0] + ".jpg");
+                for(int i = 0; i<gui.infoNecklaces.length; i++) {
+                    gui.imgs[i] = loadImage(gui.infoNecklaces[i][0] + ".jpg");
                 }
             }
 
-            else if(gui.paginaSiguiente.mouseSobreBoto(this) && gui.paginaActual<gui.numPagines){
-                gui.paginaActual++;
-                gui.infoCollares = gui.db.getInfoTaulaCollar(gui.paginaActual);
-                println("COLLARS PAGINA: "+ gui.infoCollares.length);
+            else if(gui.nextPage.mouseOnButton(this) && gui.actualPage <gui.numPages){
+                gui.actualPage++;
+                gui.infoNecklaces = gui.db.getInfoNecklaceTable(gui.actualPage);
+                println("COLLARS PAGINA: "+ gui.infoNecklaces.length);
                 gui.imgs = new PImage[4];
-                for(int i=0; i<gui.infoCollares.length; i++) {
-                    gui.imgs[i] = loadImage(gui.infoCollares[i][0] + ".jpg");
+                for(int i = 0; i<gui.infoNecklaces.length; i++) {
+                    gui.imgs[i] = loadImage(gui.infoNecklaces[i][0] + ".jpg");
                 }
             }
         }
@@ -257,12 +224,12 @@ public class programaPrincipal extends PApplet {
 
         gui.username.isPressed(this);
         gui.password.isPressed(this);
-        gui.nomCollar.isPressed(this);
+        gui.necklaceName.isPressed(this);
     }
 
     public void mouseDragged(){
-        if(gui.pantallaActual==GUI.PANTALLA.PERSONALIZA){
-            gui.collarPersonal.checkDragged(this);
+        if(gui.actualScreen == GUI.SCREEN.PERSONALIZA){
+            gui.personalNecklace.checkDragged(this);
         }
     }
 

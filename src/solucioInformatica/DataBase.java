@@ -9,17 +9,17 @@ import java.sql.Statement;
 
 public class DataBase {
 
-    // Variable de connexió a la BBDD
+    // Variable de connexión a la BBDD
     Connection c;
 
     // Variable de consulta
     Statement query;
 
-    // Dades de connexió (user, password, nom de la base de dades)
+    // Datos de conexión (user, password, nombre de la base de datos)
     String user, password, databaseName;
 
-    // Estat de la connexió
-    boolean connectat = false;
+    // Estado de la conexión
+    boolean connected = false;
 
     public DataBase(String user, String password, String databaseName){
         this.user = user;
@@ -32,17 +32,17 @@ public class DataBase {
             c = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+databaseName, user, password);
             query = c.createStatement();
             System.out.println("Connectat a la BBDD! :) ");
-            connectat = true;
+            connected = true;
         }
         catch(Exception e) {
             System.out.println(e);
         }
     }
 
-    // Retorna el número de files d'una taula
-    public int getNumRowsTaula(String nomTaula){
+    // Devuelve el número de filas de una tabla
+    public int getNumRowsTable(String tableName){
         try {
-            ResultSet rs = query.executeQuery( "SELECT COUNT(*) AS n FROM "+ nomTaula );
+            ResultSet rs = query.executeQuery( "SELECT COUNT(*) AS n FROM "+ tableName );
             rs.next();
             int numRows = rs.getInt("n");
             return numRows;
@@ -65,10 +65,10 @@ public class DataBase {
         }
     }
 
-    // Retorna el número de columnes d'una taula de la base de dades
-    public int getNumColsTaula(String nomTaula){
+    // Devuelve el número de columnas de una tabla de la base de datos
+    public int getNumColsTable(String tableName){
         try {
-            String q = "SELECT count(*) as n FROM information_schema.columns WHERE table_name ='"+ nomTaula +"' AND table_schema='"+databaseName+"'";
+            String q = "SELECT count(*) as n FROM information_schema.columns WHERE table_name ='"+ tableName +"' AND table_schema='"+databaseName+"'";
             System.out.println(q);
             ResultSet rs = query.executeQuery( q);
             rs.next();
@@ -82,9 +82,9 @@ public class DataBase {
     }
 
 
-    // Retorna les dades de la columna idUsuario de la taula USUARIO
-    public String[] getColumnaidUsuarioTaulaUsuario(){
-        int numFiles = getNumRowsTaula("usuario");
+    // Devuelve los datos de la columna idUsuario de la tabla USUARIO
+    public String[] getColidUsuarioTableUsuario(){
+        int numFiles = getNumRowsTable("usuario");
         String[] info = new String[numFiles];
         try {
             ResultSet rs = query.executeQuery( "SELECT idUsuario FROM usuario ORDER BY nom ASC");
@@ -100,10 +100,11 @@ public class DataBase {
             return null;
         }
     }
-    // Retorna les dades de les columnes RED, GREEN, BLUE de la taula COLOR
-    public int[] getColores(PApplet p5){
-        int numFiles = getNumRowsTaula("color");
-        int[] colores = new int[numFiles];
+
+    // Devuelve los datos de las columnas RED, GREEN, BLUE de la tabla COLOR
+    public int[] getColors(PApplet p5){
+        int numRows = getNumRowsTable("color");
+        int[] colors = new int[numRows];
         try {
             ResultSet rs = query.executeQuery( "SELECT red AS R, green AS G, blue AS B FROM color c ORDER BY idColor ASC");
             int nr = 0;
@@ -111,10 +112,10 @@ public class DataBase {
                 int r = rs.getInt("R");
                 int g = rs.getInt("G");
                 int b = rs.getInt("B");
-                colores[nr] = p5.color(r, g, b);
+                colors[nr] = p5.color(r, g, b);
                 nr++;
             }
-            return colores;
+            return colors;
         }
         catch(Exception e) {
             System.out.println(e);
@@ -136,7 +137,7 @@ public class DataBase {
         }
     }
 
-    // Determina si l'usuari i contrasenya introduits són a la base de dades
+    // Determina si el usuario y la contraseña introducidos se encuentran en la base de datos
     public boolean isValidUser(String userName, String password){
         String q = "SELECT COUNT(*) AS n FROM usuario WHERE idUsuario = '"+userName+"' AND password='"+password+"'";
         try {
@@ -162,7 +163,7 @@ public class DataBase {
         }
     }
 
-    void insertCollariOrnaments(PApplet p5, Collar c, String idCollar){
+    void insertNecklaceAndOrnaments(PApplet p5, Necklace c, String idCollar){
         try {
             String q = "INSERT INTO `collar` (`idCollar`, `numOrnaments`) VALUES ('"+idCollar+"', '"+c.numOrnaments+"');";
             System.out.println(q);
@@ -171,15 +172,15 @@ public class DataBase {
             for(int i=0; i<c.numOrnaments; i++){
                 String posX = String.valueOf(c.ornaments[i].x);
                 String posY = String.valueOf(c.ornaments[i].y);
-                String forma ="";
-                if(c.ornaments[i] instanceof OrnamentCercle){
-                    forma ="1";
+                String figure ="";
+                if(c.ornaments[i] instanceof RoundOrnament){
+                    figure ="1";
                 }
-                else if(c.ornaments[i] instanceof OrnamentTriangle){
-                    forma ="0";
+                else if(c.ornaments[i] instanceof TriangleOrnament){
+                    figure ="0";
                 }
-                else if(c.ornaments[i] instanceof OrnamentEstrella){
-                    forma ="2";
+                else if(c.ornaments[i] instanceof StarOrnament){
+                    figure ="2";
                 }
 
                 float r = p5.red(c.ornaments[i].color);
@@ -187,7 +188,7 @@ public class DataBase {
                 float b = p5.blue(c.ornaments[i].color);
                 String idColor = getIdColor(r, g, b);
 
-                insertOrnament(idCollar, posX, posY, idColor, forma);
+                insertOrnament(idCollar, posX, posY, idColor, figure);
             }
         }
         catch(Exception e) {
@@ -195,8 +196,8 @@ public class DataBase {
         }
     }
 
-    public String[][] getInfoTaulaCollar(){
-        int numFiles = getNumRowsTaula("collar");
+    public String[][] getInfoNecklaceTable(){
+        int numFiles = getNumRowsTable("collar");
         int numCols  = 2;
         String[][] info = new String[numFiles][numCols];
         try {
@@ -215,12 +216,12 @@ public class DataBase {
         }
     }
 
-    public String[][] getInfoTaulaCollar(int pagina){
-        int offset = (pagina-1) * 4;
+    public String[][] getInfoNecklaceTable(int page){
+        int offset = (page-1) * 4;
         String qn = "SELECT COUNT(*) As n FROM (SELECT * FROM COLLAR LIMIT 4 OFFSET "+offset+ ") AS CN";
-        int numFiles = getNumRowsQuery(qn);
+        int numRows = getNumRowsQuery(qn);
         int numCols  = 2;
-        String[][] info = new String[numFiles][numCols];
+        String[][] info = new String[numRows][numCols];
         try {
             String q = "SELECT * FROM COLLAR LIMIT 4 OFFSET "+offset;
             System.out.println(q);
@@ -239,7 +240,7 @@ public class DataBase {
         }
     }
 
-    public String getImagenCollar(){
+    public String getNecklaceImage(){
 
         String q = "SELECT idCollar FROM collar ORDER BY RAND()";
         try {

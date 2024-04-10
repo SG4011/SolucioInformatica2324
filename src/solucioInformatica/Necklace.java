@@ -2,14 +2,14 @@ package solucioInformatica;
 
 import processing.core.PApplet;
 
-public class Collar {
+public class Necklace {
 
     float x, y, rH, rV;
     Ornament[] ornaments;
     int numOrnaments;
     int numMaxOrnaments;
 
-    public Collar(int nmax, float x, float y, float rH, float rV){
+    public Necklace(int nmax, float x, float y, float rH, float rV){
         this.numOrnaments = 0;
         this.numMaxOrnaments = nmax;
         this.ornaments = new Ornament[nmax];
@@ -54,7 +54,7 @@ public class Collar {
         for(int i=0; i<this.numOrnaments; i++){
             p5.println(this.ornaments[i].mouseOver(p5));
             if(this.ornaments[i].mouseOver(p5)){
-                this.ornaments[i].setPosicio(p5.mouseX, p5.mouseY);
+                this.ornaments[i].setPosition(p5.mouseX, p5.mouseY);
                 break;
             }
         }

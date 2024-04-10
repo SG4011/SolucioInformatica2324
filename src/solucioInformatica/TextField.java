@@ -15,7 +15,7 @@ public class TextField {
 
     // Text del camp
     public String text = "";
-    int textSize = (int)Medidas.midaSubtitol;
+    int textSize = (int) Sizes.SubtitleSize;
 
     boolean selected = false;
 
@@ -30,7 +30,7 @@ public class TextField {
         this.textSize = txtSize;
     }
 
-    // Dibuixa el Camp de Text
+    // Dibuja el Campo de Texto
     public void display(PApplet p5) {
         p5.pushStyle();
         if (selected) {
@@ -49,7 +49,7 @@ public class TextField {
         p5.popStyle();
     }
 
-    // Afegeix, lleva el text que es tecleja
+    // Quitar, añadir el texto que se teclea
     public void keyPressed(char key, int keyCode) {
         if (selected) {
             if (keyCode == (int)BACKSPACE) {
@@ -69,21 +69,21 @@ public class TextField {
         }
     }
 
-    // Afegeix la lletra c al final del text
+    // Añadir la letra C al final del texto
     public void addText(char c) {
         if (this.text.length() + 1 < w) {
             this.text += c;
         }
     }
 
-    // Lleva la darrera lletra del text
+    // Quitar la última letra del texto
     public void removeText() {
         if (text.length() > 0) {
             text = text.substring(0, text.length() - 1);
         }
     }
 
-    // Retorna el text
+    // Devuelve el texto
     public String getText(){
         return this.text;
     }
@@ -93,8 +93,8 @@ public class TextField {
         return (p5.mouseX >= this.x && p5.mouseX <= this.x + this.w && p5.mouseY >= this.y && p5.mouseY <= this.y + this.h);
     }
 
-    // Selecciona el camp de text si pitjam a sobre
-    // Deselecciona el camp de text si pitjam a fora
+    // Selecciona el campo de texto si presionas encima
+    // Deselecciona el campo de texto si presionas fuera
     public void isPressed(PApplet p5) {
         if (mouseOverTextField(p5)) {
             selected = true;

@@ -3,31 +3,31 @@ package solucioInformatica;
 import processing.core.PApplet;
 import processing.core.PFont;
 
-import static solucioInformatica.Medidas.*;
+import static solucioInformatica.Sizes.*;
 
 
-public class Fuentes {
+public class Fonts {
 
-    // Array de tipografies
+    // Array de tipografias
     PFont[] fonts;
 
     // Constructor de les Fonts de l'App
-    public Fuentes(PApplet p5){
+    public Fonts(PApplet p5){
         this.setFonts(p5);
     }
 
     // Estableix les fonts de l'App
     public void setFonts(PApplet p5){
         this.fonts = new PFont[5];
-        this.fonts[0] = p5.createFont("data/KGRedHands.ttf", midaTitol);
-        this.fonts[1] = p5.createFont("data/Super Fresh.otf", midaSubtitol);
-        this.fonts[2] = p5.createFont("data/Zector.ttf", midaParagraf);
-        this.fonts[3] = p5.createFont("data/Ohyou.otf", midaTitol);
-        this.fonts[4] = p5.createFont("data/Super Sunday Personal Use.ttf", midaTitol);
+        this.fonts[0] = p5.createFont("data/KGRedHands.ttf", TitleSize);
+        this.fonts[1] = p5.createFont("data/Super Fresh.otf", SubtitleSize);
+        this.fonts[2] = p5.createFont("data/Zector.ttf", ParagraphSize);
+        this.fonts[3] = p5.createFont("data/Ohyou.otf", TitleSize);
+        this.fonts[4] = p5.createFont("data/Super Sunday Personal Use.ttf", TitleSize);
 
     }
 
-    // Getter del número de fonts
+    // Getter del número de fuentes
     public int getNumFonts(){
         return this.fonts.length;
     }
@@ -53,7 +53,7 @@ public class Fuentes {
     }
 
 
-    // Dibuixa les font de l'App
+    // Dibuja las fuentes de la App
     public void displayFonts(PApplet p5, float x, float y, float h){
         p5.pushStyle();
         for(int i=0; i<getNumFonts(); i++){
