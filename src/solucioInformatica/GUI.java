@@ -284,6 +284,7 @@ public class GUI {
         p5.rect(X+200, Y, imagenCWidth+25, imagenCHeight-50); // Info de la imatge
         p5.fill(appColors.getColorAt(2));
         visualiza.display(p5);
+        p5.fill(0);
         p5.text(infoCollares[0][0], X+300,Y+75);
     }
 
@@ -301,6 +302,7 @@ public class GUI {
             p5.rect(X + 200, Y, imagenCWidth + 25, imagenCHeight - 50); // Info de la imatge
             p5.fill(appColors.getColorAt(2));
             visualiza2.display(p5);
+            p5.fill(0);
             p5.text(infoCollares[1][0], X + 300, Y + 75);
         }
 
@@ -320,6 +322,7 @@ public class GUI {
             p5.rect(X + 200, Y, imagenCWidth + 25, imagenCHeight - 50); // Info de la imatge
             p5.fill(appColors.getColorAt(2));
             visualiza3.display(p5);
+            p5.fill(0);
             p5.text(infoCollares[2][0], X + 300, Y + 75);
         }
 
@@ -339,6 +342,7 @@ public class GUI {
             p5.rect(X + 200, Y, imagenCWidth + 25, imagenCHeight - 50); // Info de la imatge
             p5.fill(appColors.getColorAt(2));
             visualiza4.display(p5);
+            p5.fill(0);
             p5.text(infoCollares[3][0], X + 300, Y + 75);
         }
 
