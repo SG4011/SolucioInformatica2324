@@ -4,10 +4,10 @@ import processing.core.PApplet;
 
 public class Necklace {
 
-    float x, y, rH, rV;
-    Ornament[] ornaments;
-    int numOrnaments;
-    int numMaxOrnaments;
+    float x, y, rH, rV; // Dimensiones del collar
+    Ornament[] ornaments; // Array de ornamentos
+    int numOrnaments; // Contador de ornamentos
+    int numMaxOrnaments; // Número máximo de ornamentos por collar
 
     public Necklace(int nmax, float x, float y, float rH, float rV){
         this.numOrnaments = 0;
@@ -23,6 +23,7 @@ public class Necklace {
         this.ornaments = new Ornament[this.numMaxOrnaments];
     }
 
+    // Añadir ornamentos
     public void addOrnament(Ornament o){
         if(this.numOrnaments < this.numMaxOrnaments) {
             this.ornaments[this.numOrnaments] = o;
@@ -30,6 +31,7 @@ public class Necklace {
         }
     }
 
+    // Borrar el último ornamento insertado
     public void deleteLastOrnament(){
         if(this.numOrnaments>0) {
             this.ornaments[this.numOrnaments] = null;
@@ -37,6 +39,7 @@ public class Necklace {
         }
     }
 
+    // Dibujar ornamento
     public void display(PApplet p5){
         p5.pushStyle();
         p5.noFill(); p5.strokeWeight(3);
@@ -44,12 +47,11 @@ public class Necklace {
         for(int i=0; i<this.numOrnaments; i++){
             this.ornaments[i].display(p5);
         }
-
         p5.fill(0); p5.textAlign(p5.CENTER); p5.textSize(14);
         p5.text(this.numOrnaments+"/"+this.numMaxOrnaments, this.x, this.y - this.rH);
         p5.popStyle();
     }
-
+    // Lee el movimiento del cursor
     public void checkDragged(PApplet p5){
         for(int i=0; i<this.numOrnaments; i++){
             p5.println(this.ornaments[i].mouseOver(p5));
