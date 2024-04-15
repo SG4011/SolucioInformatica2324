@@ -4,10 +4,10 @@ import processing.core.PApplet;
 
 public class PopUp {
 
-    // Dimensions
+    // Dimensiones
     float x, y, w, h;
 
-    // Propietats
+    // Propiedades
     String title, message;
 
     public Button bAccept;
@@ -15,6 +15,18 @@ public class PopUp {
     boolean visible = true;
 
     // Constructor
+
+    /**
+     * Constructor de la clase PopUp
+     * @param p5 Parámetro de la libreria Processing que sirve para dibujar
+     * @param title Mensaje de alerta
+     * @param message Mensaje explicativo
+     * @param x Coordenada X dónde se va a dibujar el PopUp
+     * @param y Coordenada Y dónde se va a dibujar el PopUp
+     * @param w Anchura del PopUp
+     * @param h Altura del PopUp
+     * @param appColors Colores del PopUp
+     */
 
     public PopUp(PApplet p5, String title, String message, float x, float y, float w, float h, Colors appColors){
         this.title = title;
@@ -32,6 +44,10 @@ public class PopUp {
         this.message = message;
     }
 
+    /**
+     * Cuando debe mostrarse el PopUp
+     * @param b Parámetro para indicar si el PopUp debe ser visible o no
+     */
     public void setVisible(boolean b){
         this.visible = b;
         if(!this.visible){

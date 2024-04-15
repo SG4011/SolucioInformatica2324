@@ -2,7 +2,7 @@ package solucioInformatica;
 
 import processing.core.PApplet;
 public class Button {
-    // Propietats d'un botó:
+    // Propiedades de un botón:
 
     float x, y, w, h;  // Posición (x, y) y dimensiones (w, h)
     int fillColor, strokeColor; // Colores del botón (fill / stroke).
@@ -11,6 +11,16 @@ public class Button {
     boolean activated;  // Estado del botón (activo / inactivo).
 
     // Constructor
+
+    /**
+     * Constructor de la clase Button
+     * @param p5 Parámetro de la libreria Processing que permite dibujar
+     * @param text Texto del centro del botón
+     * @param x Coordenada X dónde se va a dibujar el botón
+     * @param y Coordenada Y dónde se va a dibujar el botón
+     * @param w Anchura del botón
+     * @param h Altura del botón
+     */
     public Button(PApplet p5, String text, float x, float y, float w, float h){
         this.textButton = text;
         this.x = x;
@@ -28,6 +38,13 @@ public class Button {
 
     public void setTextButton(String t){ this.textButton = t; }
 
+    /**
+     * Colores para los estados del botón
+     * @param cFill Color de relleno
+     * @param cStroke Color del borde
+     * @param cSobre Color cuándo el cursor está encima
+     * @param cDesactivated Color cuando el botón esta desactivado
+     */
     public void setColors(int cFill, int cStroke, int cSobre, int cDesactivated){
 
         this.fillColor = cFill;

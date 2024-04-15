@@ -15,6 +15,15 @@ public class SelectColor {
 
     float lineSpace = 15;      // Espacio entre líneas
 
+    /**
+     * Constructor de la clase SelectColor
+     * @param p5 Parámetro de la librería Processing que permite dibujar
+     * @param colors Colores para escoger el color de un ornamento
+     * @param x Coordenada X dónde se va a dibujar el desplegable
+     * @param y Coordenada Y dónde se va a dibujar el desplegable
+     * @param w Anchura del desplegable
+     * @param h Altura del desplegable
+     */
     public SelectColor(PApplet p5, int[] colors, float x, float y, float w, float h){
 
         this.colors = colors;

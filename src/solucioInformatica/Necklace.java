@@ -4,11 +4,19 @@ import processing.core.PApplet;
 
 public class Necklace {
 
-    float x, y, rH, rV; // Dimensiones del collar
+    float x, y, rH, rV; // Dimensiones  y coordenadas del collar
     Ornament[] ornaments; // Array de ornamentos
     int numOrnaments; // Contador de ornamentos
     int numMaxOrnaments; // Número máximo de ornamentos por collar
 
+    /**
+     * Construtor de la clase Necklace
+     * @param nmax Número máximo de ornamentos para un collar
+     * @param x Coordenada X dónde se va a dibujar el collar
+     * @param y Coordenada Y dónde se va a dibujar el collar
+     * @param rH Radio horizontal del cordón del collar
+     * @param rV Radio vertical del cordón del collar
+     */
     public Necklace(int nmax, float x, float y, float rH, float rV){
         this.numOrnaments = 0;
         this.numMaxOrnaments = nmax;
@@ -24,6 +32,11 @@ public class Necklace {
     }
 
     // Añadir ornamentos
+
+    /**
+     * Función para añadir un ornamento al collar
+     * @param o Ornamento en cuestión
+     */
     public void addOrnament(Ornament o){
         if(this.numOrnaments < this.numMaxOrnaments) {
             this.ornaments[this.numOrnaments] = o;
@@ -32,6 +45,10 @@ public class Necklace {
     }
 
     // Borrar el último ornamento insertado
+
+    /**
+     * Borrar el último ornamento creado
+     */
     public void deleteLastOrnament(){
         if(this.numOrnaments>0) {
             this.ornaments[this.numOrnaments] = null;
@@ -40,6 +57,11 @@ public class Necklace {
     }
 
     // Dibujar ornamento
+
+    /**
+     * Dibujar el ornamento
+     * @param p5 Parámetro de la libreria Processing para dibujar
+     */
     public void display(PApplet p5){
         p5.pushStyle();
         p5.noFill(); p5.strokeWeight(3);

@@ -9,6 +9,13 @@ public class Ornament {
     float size;
     int color;
 
+    /**
+     * Constructor de la clase Ornament
+     * @param x Coordenada X dónde se va a dibujar el ornamento
+     * @param y Coordenada Y dónde se va a dibujar el ornamento
+     * @param m Tamaño del ornamento
+     * @param c Color del ornamento
+     */
     public Ornament(float x, float y, float m, int c){
         this.x = x; this.y = y;
         this.size = m;

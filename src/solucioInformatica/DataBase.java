@@ -65,42 +65,6 @@ public class DataBase {
         }
     }
 
-    // Devuelve el número de columnas de una tabla de la base de datos
-    public int getNumColsTable(String tableName){
-        try {
-            String q = "SELECT count(*) as n FROM information_schema.columns WHERE table_name ='"+ tableName +"' AND table_schema='"+databaseName+"'";
-            System.out.println(q);
-            ResultSet rs = query.executeQuery( q);
-            rs.next();
-            int numCols = rs.getInt("n");
-            return numCols;
-        }
-        catch(Exception e) {
-            System.out.println(e);
-            return 0;
-        }
-    }
-
-
-    // Devuelve los datos de la columna idUsuario de la tabla USUARIO
-    public String[] getColidUsuarioTableUsuario(){
-        int numFiles = getNumRowsTable("usuario");
-        String[] info = new String[numFiles];
-        try {
-            ResultSet rs = query.executeQuery( "SELECT idUsuario FROM usuario ORDER BY nom ASC");
-            int nr = 0;
-            while (rs.next()) {
-                info[nr] = rs.getString("idUsuario");
-                nr++;
-            }
-            return info;
-        }
-        catch(Exception e) {
-            System.out.println(e);
-            return null;
-        }
-    }
-
     // Devuelve los datos de las columnas RED, GREEN, BLUE de la tabla COLOR
     public int[] getColors(PApplet p5){
         int numRows = getNumRowsTable("color");
@@ -195,27 +159,6 @@ public class DataBase {
             System.out.println(e);
         }
     }
-
-    public String[][] getInfoNecklaceTable(){
-        int numFiles = getNumRowsTable("collar");
-        int numCols  = 2;
-        String[][] info = new String[numFiles][numCols];
-        try {
-            ResultSet rs = query.executeQuery( "SELECT * FROM collar");
-            int nr = 0;
-            while (rs.next()) {
-                info[nr][0] = String.valueOf(rs.getInt("idCollar"));
-                info[nr][1] = rs.getString("numOrnaments");
-                nr++;
-            }
-            return info;
-        }
-        catch(Exception e) {
-            System.out.println(e);
-            return null;
-        }
-    }
-
     public String[][] getInfoNecklaceTable(int page){
         int offset = (page-1) * 4;
         String qn = "SELECT COUNT(*) As n FROM (SELECT * FROM COLLAR LIMIT 4 OFFSET "+offset+ ") AS CN";

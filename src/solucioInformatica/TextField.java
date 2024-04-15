@@ -6,7 +6,7 @@ import static processing.core.PConstants.BACKSPACE;
 
 public class TextField {
 
-    // Propietats del camp de text
+    // Propiedades del camp de text
     int x, y, h, w;
 
     // Colors
@@ -20,6 +20,16 @@ public class TextField {
     boolean selected = false;
 
     // Constructor
+
+    /**
+     * Constructor de la clase TextField
+     * @param p5 Parámetro de la librería Processing que permite dibujar
+     * @param x Coordenada X dónde se va a dibujar el campo de texto
+     * @param y Coordenada Y dónde se va a dibujar el campo de texto
+     * @param w Anchura del campo de texto
+     * @param h Altura del campo de texto
+     * @param txtSize Tamaño del texto introducido por teclado
+     */
     public TextField(PApplet p5, int x, int y, int w, int h, int txtSize) {
         this.x = x; this.y = y; this.w = w; this.h = h;
         this.bgColor = p5.color(0xFFEAF2D7);
@@ -50,6 +60,12 @@ public class TextField {
     }
 
     // Quitar, añadir el texto que se teclea
+
+    /**
+     * Función para detectar las teclas del teclado
+     * @param key variable que detecta letras
+     * @param keyCode variable que detecta la tecla espaciadora
+     */
     public void keyPressed(char key, int keyCode) {
         if (selected) {
             if (keyCode == (int)BACKSPACE) {
@@ -88,7 +104,7 @@ public class TextField {
         return this.text;
     }
 
-    // Indica si el ratolí està sobre el camp de text
+    // Indica si el ratón está sobre el campo de texto
     public boolean mouseOverTextField(PApplet p5) {
         return (p5.mouseX >= this.x && p5.mouseX <= this.x + this.w && p5.mouseY >= this.y && p5.mouseY <= this.y + this.h);
     }
